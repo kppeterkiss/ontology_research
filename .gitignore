@@ -1,2 +1,6 @@
-.venv
-.python-version
+./venv
+./python-version
+./beekeeping_corpus
+*.json
+uv.lock
+
