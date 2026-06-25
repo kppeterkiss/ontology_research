@@ -60,7 +60,7 @@ def check_lexical_exact_match(mention, ontology):
 # =====================================================================
 # BERT SIMILARITY BASED ON TERM + CONTEXT
 # =====================================================================
-def get_top_candidates_combined(mention, context, ontology, top_n=2):
+def get_top_candidates_combined(mention, context, ontology, combined = True,top_n=2):
     if not ontology: return []
     scored_candidates = []
 
@@ -74,7 +74,7 @@ def get_top_candidates_combined(mention, context, ontology, top_n=2):
         term_score = util.cos_sim(mention_emb, name_emb).item()
         context_score = util.cos_sim(context_emb, def_emb).item()
 
-        # 60% weight for the term form, 40% for the definition context
+        # 60% súly a kifejezés alakjának, 40% a definíció környezetének
         combined_score = (term_score * 0.6) + (context_score * 0.4)
 
         scored_candidates.append({
@@ -85,8 +85,9 @@ def get_top_candidates_combined(mention, context, ontology, top_n=2):
         })
 
     scored_candidates.sort(key=lambda x: x["score"], reverse=True)
+    if not combined: scored_candidates.sort(key=lambda x: x["term_score"], reverse=True)
+    #else: scored_candidates.sort(key=lambda x: x["score"], reverse=True)
     return scored_candidates[:top_n]
-
 
 # =====================================================================
 # PHASE 3: TWO DIFFERENT LLM QUERIES FOR TESTING

@@ -59,7 +59,7 @@ def check_lexical_exact_match(mention, ontology):
 # =====================================================================
 # BERT HASONLÓSÁG KIFEJEZÉS + KONTEXTUS ALAPJÁN
 # =====================================================================
-def get_top_candidates_combined(mention, context, ontology, top_n=2):
+def get_top_candidates_combined(mention, context, ontology, combined = True,top_n=2):
     if not ontology: return []
     scored_candidates = []
 
@@ -84,6 +84,8 @@ def get_top_candidates_combined(mention, context, ontology, top_n=2):
         })
 
     scored_candidates.sort(key=lambda x: x["score"], reverse=True)
+    if not combined: scored_candidates.sort(key=lambda x: x["term_score"], reverse=True)
+    #else: scored_candidates.sort(key=lambda x: x["score"], reverse=True)
     return scored_candidates[:top_n]
 
 
@@ -297,13 +299,14 @@ def run_optimized_pipeline():
 
             # BERT jelölt keresés
             top_candidates = get_top_candidates_combined(mention, context, CURRENT_ONTOLOGY, top_n=2)
+            top_term_and_label_only_candidates = get_top_candidates_combined(mention, context, CURRENT_ONTOLOGY,combined=False, top_n=2)
 
             # --- AZ ABLÁCIÓS TESZT INDÍTÁSA ---
             # Hívás 1: Kontextussal és definícióval
             llama_with_ctx = ask_llama_nil_prediction(mention, context, top_candidates)
 
             # Hívás 2: CSAK a kifejezés és a domain információ (Kontextus NÉLKÜL)
-            llama_no_ctx = ask_llama_nil_prediction_no_context(mention, top_candidates)
+            llama_no_ctx = ask_llama_nil_prediction_no_context(mention, top_term_and_label_only_candidates)
 
             print(
                 f"   -> Teszt 1 (Ctx): {llama_with_ctx.get('decision')} | Teszt 2 (No-Ctx): {llama_no_ctx.get('decision')}")
