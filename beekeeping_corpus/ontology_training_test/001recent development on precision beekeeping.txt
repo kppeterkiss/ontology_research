@@ -1,0 +1,675 @@
+The aim of this systematic review was to point out the current state of precision beekeeping and to draw im­
+plications for future studies. Precision beekeeping is defined as an apiary management strategy based on
+monitoring individual bee colonies to minimize resource consumption and maximize bee productivity. This
+subject that has met with a growing interest from researchers in recent years because of its environmental im­
+plications. The Preferred Reporting Items for Systematic Reviews and Meta-Analysis (PRISMA) was selected to
+conduct this review. The literature search was carried out in the Scopus database for articles published between
+2015 and 2023, being a very recent issue. After two rounds screening and examination, 201 studies were
+considered to be analysed. They were classified based on the internal parameters of the hive, in turn divided by
+weight, internal temperature, relative humidity, flight activity, sounds and vibrations, gases, and external pa­
+rameters, in turn divided by wind speed, rainfall and ambient temperature. The study also considered possible
+undesirable effects of the use of sensors on bees, economic aspects and applications of Geographic Information
+System technologies in beekeeping. Based on the review and analysis, some conclusions and further directions
+were put forward.
+
+1. Introduction
+
+microprocessor powered by a battery and usually linked to a network to
+remotely send the data collected by the server. The microprocessor
+collects data at regular intervals before transferring it to a server, the
+two main types of microprocessors used today are Arduino and Rasp­
+berry Pi [4]. The detected data is sent to the cloud for storage, analysis
+and alarm generation [5]; in some already tested systems the informa­
+tion is displayed by beekeepers on an application that groups data by
+hive [6].
+In recent years, monitoring systems have greatly advanced through
+the use of wireless sensor networks (WSN). A WSN consists of embedded
+devices that can acquire data from different sensors, process them and
+communicate with a computer and a cloud database [7]. These devices
+are known as nodes or motes and are the core of the Internet of Things
+(IoT), defined as a network of Internet-enabled objects connected to web
+services that interact with these objects [8].
+Considering the growing interest of the researchers towards PB, the
+aim of this paper is to examine and summarize the most recent published
+articles in the field of PB, especially taking into consideration the
+monitoring of hive internal and external parameters, in order to make
+
+Precision Agriculture (PA) methods have been developed in different
+fields of agriculture, such as animal husbandry, viticulture, horticulture
+and forestry [1]. In addition, Precision Beekeeping (PB) has been
+developed in recent years, firstly defined by Zacepins et al. [2] as an
+apiary management strategy based on monitoring individual bee col­
+onies to minimize resource consumption and maximize bee productiv­
+ity. PB supports traditional beekeeping, which provides for the manual
+and periodic control of the apiaries, often located at considerable dis­
+tances from each other, this entailing a high cost to reach them. Each
+hive is inspected on average 15 times a year and, meanwhile, the
+beekeeper has no insight into the condition of the colonies, making
+timely action impossible to take [3].
+PB uses smart hives, equipped with sensors, aimed at detecting the
+parameters descriptive of the colonies state of health and providing in­
+formation to the beekeeper via web-based systems that are accessible
+also by smartphone, in this way the beekeeper can choose to inspect only
+the hives that require direct supervision. The sensors are connected to a
+detailed and reliable forecasts on the evolution of the behaviour of the
+bee colony, through the application of suitable methodologies and
+instruments.
+
+2.1. Identification
+The research was conducted in January 2023. The Scopus database
+was used taking into consideration title, abstract and keywords. It was
+selected as being the most relevant for publications in the biosystems
+engineering area. The following criteria were adopted: (1) years
+(2015–2023), (2) subject areas (Agricultural and Biological Sciences;
+Environmental Science; Computer Science; Veterinary Science and
+Veterinary Medicine; Engineering; Chemical Engineering), (3) keywords
+(precision beekeeping, precision apiculture, honey bee monitoring,
+smart hive, connected hive) and (4) language (English). A total of 72
+articles were identified and exported into an Excel spreadsheet for
+further analyses.
+
+2. Materials and methods
+In this study, a systematic literature search method was applied,
+using the identification, screening and eligibility procedures described
+by the Preferred Reporting Items for Systematic Reviews and MetaAnalyses (PRISMA) statement (https://prisma-statement.org/accessed
+on 2 January 2023) [9]. It describes new reporting guidelines, reflecting
+advances in methods for identifying, selecting, evaluating, and sum­
+marizing studies published in the literature.
+2.2. Screening
+
+2.3. Eligibility
+
+In this phase, the 72 identified articles were examined by reading
+their titles and abstracts. The inclusion criteria considered to perform
+the screening were:
+
+The authors examined all of the 65 selected articles by reading the
+full texts. The criteria for inclusion in the next stage were:
+• The full text of the article is available
+• Article is about precision beekeeping
+• Article is about smart hives
+• Article about honey bee monitoring
+• Article is not a book
+
+• Article on precision beekeeping
+• Article on smart hive
+• Article on honey bee monitoring
+All the 72 articles were reviewed at this stage, but only 65 of them
+met of the inclusion criteria.
+
+In this phase, a total of all 65 articles were processed, meeting the
+above listed criteria. Fig. 1 shows the review methodology flow chart.
+2.4. Additional review
+
+relative humidity, 66 for mass in the sense of weight of the hive, 68 for
+sound, 27 concerning flight activity, specifically entry and exit of the
+hive (bee inflow/outflow). For the external parameters, that is wind and
+rain, there were 12 and 14 items respectively. The distribution of the
+selected papers based on the studied parameters is shown in Fig. 3.
+During the examination of the articles, in order to link the abovementioned parameters to the behaviour of the bee colony, it was
+considered appropriate to include also some papers concerning the
+biology of insects, some of them published before the time period
+examined with reference to PB (2015–2023).
+The country of origin of the first author was also considered, with
+reference to the geographical position of the publication. Most of the
+publications come from Latvia with 28 articles, followed by USA with
+26. Germany has 20 articles, Italy and United Kingdom 11 have publi­
+cations each. China appears with 10 publications, followed by France,
+Brazil, and Mexico with 8, 7 and 6 respectively. Canada and Spain have 5
+publications, while 4 publications were found for Poland, Turkey,
+Ethiopia, Bulgaria, New Zealand, followed by India, Africa, Slovenia
+with 3 articles and finally Serbia, South Korea, Greece, Russia, Bosnia
+and Herzegovina, Japan, Romania, Belgium, Australia, Denmark,
+Hungary, Philippines, Vietnam, Sweden, Egypt, Arizona, Ireland,
+Luxembourg with 1–2 papers (Fig. 4).
+On average, 23 papers were published per year between 2015 and
+2022. Fig. 5 shows a growing trend starting from 2017, a year with 17
+published papers, to reach the maximum of 38 published articles in
+2020, while in 2021 and 2022 there were respectively 23 and 16 papers.
+
+To identify additional articles related to precision beekeeping which
+may be missing from the keyword search, the 65 articles found in Scopus
+were saved and listed. Then, the automated search options in Scopus
+electronic database were used to obtain all articles that where either
+cited or referenced by these 65 articles. In total, 520 articles were
+identified and exported into an Excel spreadsheet to be analysed.
+Applying the search criterion language (English) the field narrows down
+to 516 articles.
+The same screening method adopted in section 2.2 was then applied,
+reducing the 516 articles to 200. The articles were read and only 172
+met the criteria reported in section 2.3. However, it turned out that 36 of
+the 172 articles had already been considered in the first 65. Therefore,
+these articles were excluded and the remaining 136 were considered.
+Overall, 201 articles were found and reviewed, i.e. the initial 65 and the
+additional 136 resulting from the additional review. Fig. 2 shows the
+flowchart of the methodology used for the additional review.
+3. Results
+Analyzing the selected papers, internal parameters of the hive are
+taken into consideration (section 3.1), in turn divided by weight of the
+hive (section 3.1.1.), internal temperature (section 3.1.2), relative hu­
+midity (section 3.1.3), flight activity (section 3.1.4), sounds and vibra­
+tions (section 3.1.5), gases (section 3.1.6), and external parameters
+(section 3.2), in turn divided by wind speed (section 3.2.1), rainfall
+(section 3.2.2) and ambient temperature (section 3.2.3). Furthermore,
+this study considered possible undesirable effects of the use of sensors on
+bees (section 3.3), economic aspects (section 3.4), and applications of
+Geographic Information System (GIS) technologies in beekeeping (sec­
+tion 3.5).
+As regards internal temperature, 98 articles were identified, 69 for
+
+3.1. Hive internal parameters
+Regardless of their use (e.g. research, beekeeping, awareness raising
+on various issues, such as environmental ones), the main objective of
+smart hives is to provide real-time information on the state of health of
+the colony and the quality of its internal environment. It is therefore
+result was obtained in China, Tai’ an City, Shandong Province, an area
+with 12.9 ◦ C annual average temperature, 26.4 ◦ C highest monthly
+average temperature in July, and − 2.6 ◦ C lowest monthly average
+temperature in January.
+The scales used in most researches are placed externally at the base
+of the hive and detect the total weight of the hive. In the low cost
+platform by Seritan et al. [15], the mass sensor is composed of a single
+load cell (Fig. 6 a), it has an accuracy of ±100 g and detects up to a
+maximum of 200 kg, while the system proposed by Ochoa et al. [16] uses
+four load cells placed at each corner of the base of the hive (Fig. 6 b). On
+the other hand, the system proposed by Sakanovic & Kevric [17] detect
+the weight of each individual frame of the hive using twenty sensors,
+two for each frame. In the model proposed in Ref. [14] by Li et al. the
+sensor for detecting mass is placed in an internal structure of the hive the
+frames are placed on, in order to measure only the total weight of the
+frames.
+The weight monitoring system of the hives proposed by Zacepinz
+et al. [18] uses a single point load cell, this monitoring can help identify
+the beginning and end of the nectar flow and evaluate the foraging ac­
+tivity of the colony.
+When analysing the weight of the hive, some meteorological factors
+such as precipitation and wind, can influence the data [10]. To over­
+come the problem of moisture absorbed by the wood of the hive,
+Zacepins et al. [19] recommend the use of polystyrene hives, alterna­
+tively they recommend taking into consideration the mass variations of
+an empty hive placed under the same environmental conditions.
+important to control parameters inside the hive such as weight, tem­
+perature and relative humidity, sounds and vibrations. These parame­
+ters and the main technologies used to monitor them are described in the
+following sections.
+3.1.1. Weight of the hive
+The weight of a hive provides important information on the size and
+activity of the colony; its increase suggests a production of honey and an
+expansion of the population, on the contrary, a decrease may indicate
+the consumption of honey, typical of the winter season, but at other time
+periods it may be related to swarming or mortality events (poisoning,
+diseases, etc.) [10].
+An abnormal variation in the weight of the hive may also indicate
+theft [11]. During the day, there are variations in the weight of the hive
+that can be considered normal: in the morning, when the bees go out to
+forage, there is a drop of about 300–500 g, while with the return of the
+bees laden with pollen and nectar, the weight gradually increases until
+just before sunset. During the night, this parameter may undergo a
+decrease due to the consumption of honey by bees [12], a reduction of
+200 g per night was recorded by Catania & Vallone [13] for the entire
+monitoring period. During the cold season the bees rarely go out to
+forage, consuming the internal stocks of the hive, and consequently the
+weight of the colony tends to decrease by 30–80 g per day [14]. This
+
+3.1.2. Temperature
+Internal hive temperature is the primary indicator of a colony’s
+health. The ability of a colony to thermoregulate is influenced by the
+subspecies and, within this, by the genetic diversity of the colony [10].
+Bees maintain a temperature of 34 ± 1.5 ◦ C near the brood [16]. Tem­
+perature variations can occur in correspondence with natural events,
+such as swarming, or adverse events, such as a weakening of the colony,
+which is unable to keep the temperature stable. Indeed, by measuring
+temperature, swarming can be predicted, since temperature inside the
+hive tends to increase in the immediately preceding period [12]. In the
+model proposed by Andrijević et al. [5] a push notification is set up and
+sent, informing about changes in the hive, especially when the internal
+temperature exceeds 35 ◦ C. On the contrary, in the model proposed by
+Ochoa et al. [16], when the temperature drops below the threshold of
+20 ◦ C near the brood, an alarm sends a voice call, an e-mail and an SMS.
+When monitoring the internal temperature of the hive it is important
+to consider the position of the sensors; those placed close to the brood, in
+the central and warmest part of the hive, are less affected by external
+conditions, while in the periphery, closer to the walls of the hive, they
+will be more affected [3]. Individual sensors can be inserted in a small
+box placed longitudinally in the center of a normal frame [20] or sus­
+pended in the center of the hive near the brood [21], or in the center of a
+frame which is positioned between the body of the hive and the hon­
+eycomb [22]. In the model proposed by Zabasta et al. [23] two more
+sensors are added to the central one between the external frames, while
+
+in Ref. [24] the authors use two Humidity Temperature Sensors
+(DHT22) installed in the center of lateral side and in the center of the
+back side, directly in the wood panels of the hive. Finally, in Ref. [14]
+two sensors are arranged on the internal wall near the entrance to the
+hive. Fig. 7 shows some examples of sensor installation.
+On the other hand, in some studies the location of the sensors is not
+indicated so the reported values are difficult to compare; for example, in
+Ref. [25] the authors indicate a stable brood temperature between 28 ◦ C
+and 32 ◦ C, lower than in other studies. The machine learning model
+based on the long-term memory algorithm (LSTM) has also been used to
+detect when a bee colony is about to lose control of its temperature [26].
+The predictive model analyzes internal temperature and relative hu­
+midity, external temperature, weight and sound.
+3.1.3. Relative humidity
+Relative Humidity (RH) inside the hive can be considered as an in­
+dicator of health and optimal development of the bee colonies, which
+the bees are able to maintain at stable values of around 70% [13].
+For egg hatching, the optimal RH range goes from 90 to 95%, while
+values lower than 50% hinder this phase [27]. RH can also influence the
+development of parasites and pathogens; specifically, values between
+55% and 70% favor the reproduction of varroa (Varroa destructor), while
+higher values reduce its reproduction [28].
+A good correlation between hive internal parameters and weather
+conditions is important for production purposes; RH inside the hive
+appears to respond to the external weather conditions. An increase in RH
+(>95% RH) was detected on days with high levels of precipitation [29].
+Similarly to temperature, RH is a useful parameter for predicting
+swarming, as it has been observed that this event is preceded by a
+decrease in RH due probably to ventilations, consisting in a rapid flitting
+of bee wings [30]. In Ref. [24], the DHT22 sensor is also used for RH
+measurement, having a 0–100% RH measurement range with 2% ac­
+curacy and 0.1% resolution. The authors noticed that bees were able to
+keep the internal RH quite stable during the year of observation.
+at the hive entrance and use infrared (IR) radiation to detect bees
+departing and arriving to the hive [3]. Whereas in Ref. [39], foraging
+activity monitoring is based on the use of Wireless Sensor Networks
+(WSN), with an average counting accuracy of 84.92% and 85.95% for in
+and out, respectively.
+The BeeCheck counting device validated in Ref. [33], distinguishes
+incoming and outgoing bees, consists of 24 entrance tubes made of
+polyethylene, with seven capacitive sensors installed in each tube; the
+passage of the bees causes a change in electrical capacity which acts as a
+signal. The authors proved capacitive sensors to be superior, since they
+measure more precisely and were less susceptible to dirt and propoli­
+sation from bees compared to optical sensors, such as infrared, where
+frequent failure is reported as signals are jammed by contaminants.
+However, bee counter devices have some drawbacks; when the flight
+activity is high, counting errors may occur due to bees trying to enter the
+hive at the same time [40].
+The use of a camera does not interfere in any way with the normal
+behavior of the bees and allows to collect other data: predation by
+hornets, detection of parasites such as varroa [41] and loads of corbic­
+ular pollen [42,43].
+
+3.1.4. Flight activity
+Bee flight activity is defined as the number of bees entering and/or
+leaving the hive in a given time interval. In spring, more than 100,000
+flights departing and arriving in a day can be recorded in a welldeveloped hive [31]. The number of bees leaving the hive to forage is
+positively correlated to the increase in environmental temperature and
+solar radiation and negatively to environmental relative humidity [32].
+Flight activity provides information on colony populations and foraging
+activity; it is also an important parameter to monitor when evaluating
+the impact of pesticides on bees [33].
+Flight activity has been negatively correlated to the presence of
+predators, especially bee-eaters (Merops apiaster) [34] and hornet (Vespa
+spp.).
+Standard methods for estimating bee flight activity involves the use
+of two observers both having a hand-held counting device and one
+keeping time [35]. The use of human observation, while likely accurate,
+limits the amount of time that the hive can be observed.
+In recent years, automated counting methods have been adopted to
+reduce human error and time [10]. Flight activity can be monitored
+through images continuously acquired at the hive entrance. In Ref. [36]
+the camera is attached to the front wall of the hive, about 30 cm above
+the entrance, and pointing downwards; moreover, a white table is
+positioned in front of the entrance to better distinguish the bees (Fig. 8).
+In Ref. [32] the webcam is placed in front of the hive entrance inside an
+observation box with a red LED lighting panel. In this study the bees are
+detected using the background subtraction method, using the Kalman
+filter to predict the future position of the bees and applying a suitable
+algorithm to assign detection to existing targets which allows counting
+with a precision of 94%. Object tracking algorithms were applied to
+count the number of bees that enter and leave the hive based on a pre-set
+boundary surrounding the hive entrance in Ref. [37]. They obtained an
+over count of departures by 18% and arrivals by 44%. The Long
+Short-Term Memory (LSTM) recurrent neural network model achieved
+good results in bee activity prediction as found in Ref. [5]. The authors
+obtained an error of 8.9 missed bees per hour for bees outbound and 7.8
+missed bees per hour for bees inbound at the hive. However, the surveys
+were made in autumn and the authors expected to find higher errors per
+hour for measurements carried out during spring and summer.
+As stated by Ref. [38], in the last decade, promising approaches have
+been made by using enhanced video-based systems to record bee flight
+activity utilising deep learning and artificial intelligence. Commercially
+available bee in-and-out activity counting devices are usually installed
+
+3.1.5. Sounds and vibrations
+Bees communicate within the colony through vibrations and sound
+signals [44]. Continuous sound monitoring can provide important in­
+formation on bee health. It can be used to detect the presence of the
+queen [20], predict swarming [45] or pillaging [46], colony strength
+[47], the presence of parasites and predators [44].
+Queen bees emit sounds of different frequencies: before flickering,
+they produce a series of short pulses with a frequency of about 350 Hz; as
+soon as they emerge, they emit sounds with a frequency of 400 Hz
+during the first day and about 500 Hz from two to four days after birth.
+They start with around 17 short pulses, and the number decreases to
+around 7 after several days [48].
+Before swarming, bees make a special sound that spreads at a dis­
+tance of 5–6 m from the hive at a frequency of 1500 Hz [49]. When they
+feel threatened by predators such as hornets (Vespa spp.) and bee-eaters
+(M. apiaster) they emit a hissing sound with a frequency ranging from
+300 to 3600 Hz [50].
+The analysis and classification of the vibroacoustic signal involves
+the acquisition of sound using microphones or accelerometers; the
+recorded signal is usually filtered to remove background noise and un­
+wanted frequencies. Finally, the data are classified for subsequent ana­
+lyses [51]. Different types of microphones placed inside or outside the
+hive can be used. Their position varies based on different scientific
+approaches. Electret microphones are used in Ref. [25], clip micro­
+phones in Ref. [52] and MEMS (Micro Electro-Mechanical Systems)
+microphones in Ref. [24], in Ref. [53] accelerometers were used. In
+Ref. [54] the position of the microphones was chosen to monitor
+different parts of the colony, placing one near the hive entrance and the
+other near the brood.
+Vibrations and sounds data are extremely difficult to explain,
+because the meaning of the sound or its variations can only be inter­
+preted if associated with the simultaneous observation of what is
+happening in the colony; moreover, the different sensitivity of the mi­
+crophones makes it difficult to compare the data [47].
+Papers related in hive sound analysis generally use data pre­
+processing with systems that are able to recognize bee sounds and
+discriminate them from other captured sounds. In Ref. [30], the authors
+applied a Butterworth filter with cut-off frequencies 100 Hz and 2000 Hz
+to remove all sound signals disturbing the bee frequencies. Kulyukin
+et al. [52], compared several deep learning (DL) and standard machine
+learning (ML) methods in classifying audio samples from microphones
+deployed approximately 10 cm above Langstroth beehives’ landing
+pads. Audio classification algorithms they designed were able to
+discriminate bee buzzing, cricket chirping, and ambient noise.
+Most of the bee-unrelated sounds are short-lived compared to
+beehive sounds. In Ref. [55] the authors used a method based on a Fast
+Fourier Transform (FFT) and Self-Organising Map (SOM) to investigate
+how the sounds produced by honeybees in hives changed after their
+queen had been removed. The model achieved high accuracy of 92%
+discriminating between queen-absent and queen-present hives. In
+Ref. [56] the author achieved the best performance in swarming pre­
+diction with the system based on Hidden Markov Model (HMM) acoustic
+models and Mel-Frequency Cepstral Coefficients (MFCC) features,
+although Convolutional Neural Networks (CNN) system provided high
+accuracy when large amounts of acoustic training material are available,
+but demanding higher computational power.
+
+3.2. Hive external parameters
+
+3.1.6. Gases
+Few studies describe gas monitoring in beehives. Carbon dioxide
+(CO2) measurement plays an important role in analyzing hive behavior.
+It is related to bee metabolism, as a variation in its respiratory emission
+is associated with the metabolic heating of a bee in its normal activity.
+Furthermore, when CO2 inside the hive reaches levels higher than the
+atmospheric value, the bees begin to ventilate to control and keep it at
+an acceptable level, i.e. between 0.1% and 4.3% [57,58]. This parameter
+is also related to the hive internal relative humidity and temperature and
+the amount of sound generated by bees, which correlates with respira­
+tion and gas exchange events [24]. In Ref. [29] the authors monitored
+the presence of CO2 inside the hive; they also evaluated the presence of
+polluting gases such as: nitrogen dioxide (NO2), ethanol (CH3CH2OH),
+ammonia (NH3), carbon monoxide (CO) and methane (CH4). The au­
+thors confirmed that low CO2 levels could indicate the loss of bees due to
+disease, poisoning, attack by predatory animals or family queenless,
+thus requiring immediate action by the beekeeper.
+The presence of some gases can be used as an indicator of honey bee
+disease. According to Ref. [59] valeric acid, caprylic acid and isocaprylic
+acid may be indicator of the presence of Paenibacillus larvae, the
+causative agent of American foulbrood (AFB). They developed a device
+equipped with semiconductor gas sensors, with a sampling probe placed
+in the middle of the beehive (Fig. 9). In Ref. [60] the authors identified
+40 compounds as volatile biomarkers for AFB infections, particularly 2,
+5-Dimethylpyrazine showed the greatest sensitivity and accuracy for
+diagnosing AFB, it was exclusively detected in AFB-disease larvae and
+was detectable in beehives with <10 AFB-symptomatic larvae. The au­
+thors state that these biomarkers are prime candidates to be targeted by
+a portable sensor device for rapid and non-invasive diagnosis of AFB in
+beehives.
+
+3.2.2. Rainfall
+In [39] the authors state that bees are not active in rainy days when
+the ambient relative humidity is higher than 80%.
+Honey bees can predict future rainfall by increasing foraging activ­
+ity. He et al. [65], with Radio Frequency Identification (RFID) moni­
+toring, demonstrated that foragers work more intensely in the days
+preceding rains than in those following a sunny day.
+Subspecies of A. mellifera are found in a wide range of climates, from
+hot and dry to tropical and temperate [27]. Hives are evidently affected
+by the external weather conditions [61]. Ngo et al. [32] show the cor­
+relation between environmental data and colony activity (in terms of
+pollen collection). The results show that temperature, relative humidity,
+wind speed, rainfall and light intensity influence pollen collection. For
+example, heavy rains or a light breeze negatively affect the quantity of
+collected pollen. Climate also indirectly influences pollinator activity by
+altering the amount and sugar concentration of nectar in flowers [62].
+The hive can only be inspected during the day with no rain and the
+ambient temperature is in the range 15 ◦ C–38 ◦ C [63]. Monitoring cli­
+matic conditions is therefore essential to keep bees healthy.
+3.2.1. Wind speed
+The flight of insects is energetically expensive, and this cost is also
+influenced by the presence and intensity of wind; indeed, bees have a
+lower foraging rate as wind speed increases. Furthermore, in case of long
+windy periods, bees refrain from going out to forage and honey pro­
+duction stops. In Ref. [64] the authors found that a wind speed of just
+2.75 m/s results in a 37% decrease in flower visits.
+Wind is measured and related to honey production in Ref. [13].
+Decreases in honey production were observed at wind peaks of over 4
+m/s. The reduction in honey was attributable to the lack of exit of the
+bees and their consumption of honey. Therefore, the choice of the site
+must provide for poor wind conditions, as it represents a strong envi­
+ronmental factor limiting honey production.
+
+3.2.3. Ambient temperature
+Honey bees use all their strength to heat the hive; being hetero­
+thermic insects, their body temperature is prone to significant changes.
+However, bees possess an extraordinary power of thermoregulation, this
+function of their body is able to stabilize the body’s heat according to the
+environment and the different needs and this allows them to maintain
+colonies throughout the year [66].
+Foraging activity takes place in a wide range of temperatures, from
+10 to 40 ◦ C [27]. Ambient temperature interferes with the life of the
+colonies; when temperature is too high or too low compared to the
+temperature of 35 ◦ C which guarantees regular breeding of the brood,
+bees have to invest significant energy resources to cool or heat the hive,
+respectively. In Ref. [67] costs of thermoregulation, however, were
+rather independent of ambient temperature when in the range 13–30 ◦ C.
+As the resources needed to fuel thermoregulation are strongly
+limited, honey bee colonies should refrain from brood rearing under
+cold environmental conditions. When ambient temperature is low, bees
+go into cold stress, worker bees tend to remain relatively inactive and
+cluster densely in the so-called winter cluster to reduce heat loss from
+the colony, while individual workers actively produce heat by flight
+muscle shivering to keep the cluster core temperature above ambient
+temperature [68].
+
+assigning each location on the map an estimated amount of resources to
+be collected at that location (Fig. 10).
+This model was then improved in Ref. [72] in terms of details by
+proposing a system capable of identifying the ideal number of bee col­
+onies necessary for optimal foraging. The new model considered mul­
+tiple factors as the number of fields in the area, field productivity,
+possible level of contamination, presence of infrastructures. For
+example, the authors coded the fields by colour according to their
+pesticide applications, ranging from bright red to bright green (Fig. 11).
+The region with the value equal to zero (field without pesticides) have
+its polygon coloured bright green.
+The geographical characterization of an area can be considered a
+useful tool for honey production. Using GIS, allowing the acquisition,
+recording, analysis, display and return of information deriving from georeferenced geographical data, thematic maps can be created to describe
+that area. In Ref. [75] the authors also used GIS to identify the best lo­
+cations for new apiaries within a given area, thanks to a set of specific
+data: availability of flowering plants, land slope, distance from water
+resources and roads, the distance between apiaries, as well as climatic
+factors such as temperature, relative humidity and rainfall.
+Furthermore, GIS has been used to predict the sites invaded by
+parasites and to trace the movements of invasive species within new
+environments in order to allow for the identification of the most effec­
+tive interventions against parasites [76].
+In [77] an interactive map was designed, using Google Maps, as a
+decision support tool in solving spatial problems associated with the
+American Foulbrood disease. By selecting a position on the map, the
+beekeeper has the possibility of identifying potential risks of infection
+and consequently being able to decide on a new position for the hive
+(Fig. 12).
+GIS can be used alone or in combination with other technologies, as
+well as Remote Sensing (RS), which acquires information from satellite
+or aerial images of the site, then included into the GIS analysis to provide
+more information on the study area [78].
+Vegetation land cover variations can be studied using GIS and RS to
+understand the impacts on honey production [79].
+Maps from such systems are an effective aid to beekeepers in
+selecting the most appropriate locations for their apiary. In Al-Baha
+
+3.3. Possible undesirable effects of sensor use on bees
+A major concern of the effects of Radio Frequency Electromagnetic
+Radiation (RF-EMR) on animals is tissue heating due to the specific
+absorption rate of the propagated wave. Short-term exposure to
+Extremely Low Frequency-ElectroMagnetic Fields (ELF-EMF) at 50 Hz,
+comparable to those found around power lines, reduced learning per­
+formance and increased bee aggression in Ref. [69].
+Wireless sensor networks used in precision farming systems need not
+raise pollinator health concerns. A study carried out by Henry et al. [70]
+indicate that 2.4 GHz signal strength levels over 72-h periods did not
+affect temperature, humidity, and acoustic measurements compared to
+hives that did not receive exposure to long term RF-EMR.
+The use of sensor protection is suggested to prevent them from being
+propolized, as in Ref. [22] where coating with mesh <0.2 mm is
+recommended.
+3.4. Economic aspects
+Beekeepers are not usually willing to invest in digital solutions;
+therefore, the cost of smart hives becomes a crucial aspect, and should be
+reduced to the minimum possible [18].
+In [15] the authors realized a low-cost platform to monitor the health
+of bees and the quantity of honey produced, already described in section
+3.1.1., the cost of which is approximately € 300. The data collection
+system of weight, temperature and relative humidity can range from 17
+to 35 USD per hive in Ref. [16]. The cost calculated for the prototype is €
+192 in Ref. [18] and € 170 in Ref. [22] excluding the Global System for
+Mobile Communications (GSM).
+Although there are sufficient hardware and technical resources for
+the practical application of precision beekeeping, the market uptake of
+sensor-based decision support systems is still very low. The main reason
+is the uncertainty about the economic benefit that using these systems
+could provide [71]. To reduce costs, only a part of the hives per apiary
+could therefore be equipped with sensors, assuming that different col­
+onies in the same environment are in similar conditions [4].
+3.5. Geographic Information System (GIS) applications in apiculture
+Normally beekeepers choose to locate apiaries based on their expe­
+rience and sometimes the location may not be optimal for bee colonies.
+An apiary should normally consist of 30–80 colonies for practical pur­
+poses, the most important question determining the optimal number is
+the amount of forage available in a given area [72]. In some countries,
+such as Indonesia [73], nomadism is very common, and beekeepers are
+forced to change the location of the apiary very often to provide food
+sources for their colonies.
+In [74] the authors developed a model using the Python program­
+ming language, with the help of aerial and satellite images of agricul­
+tural fields detected using Google Maps with the aim of providing
+support to beekeepers in the search and selection of suitable apiary lo­
+cations. In the first step of the process, the fields in the aerial image of
+the region were annotated with a polygons and an estimated value of
+resources on that field was given, obtaining a semantically annotated
+map. In the second step, the method calculated a value function
+4. Discussion
+Precision beekeeping was born in response to the need of optimizing
+beekeeping management with sensors and specific programs, with the
+aim of helping beekeepers understand what is happening inside the
+hives without necessarily making inspections. Smart hives remotely
+provide real-time information about the hives, thereby minimizing
+management costs and at the same time minimizing stress in the colony
+[71].
+Weight monitoring provides one of the most important data for
+beekeepers about the colonies, as it is related to significant activities
+such as the start of nectar collection and the consumption of food re­
+serves by the colonies which can indicate the need for additional power
+supply. Continuous monitoring of the weight of at least one reference
+colony at the apiary, can help to identify the beginning and end of
+nectariferous flow and evaluate the foraging activity of the colony [18].
+Monitoring the internal temperature of the hives gives indications on
+the health state of the colonies, which in optimal conditions are able to
+keep constant relative humidity and temperature. If the temperature
+inside the hive is correlated to the ambient temperature and the day/
+night temperature range, it means that the hive is unable to do ther­
+moregulation and requires timely intervention.
+Monitoring the external environmental parameters is also essential
+to correctly understand the state of bee colonies [18].
+Some researchers [47,82,83] integrated the data collected by the
+sensors placed inside the hive with meteorological data and weekly in­
+spections, obtaining a high precision model (Healthy Colony Checklist,
+HCC). The standardized HCC inspection form indicates the size of the
+brood, the quantity of adult bees, the presence of the queen, the abun­
+dance of food, the absence of stress and adequate space. This is an
+original approach that allows to better interpret the data collected by the
+sensors and to train the forecasting algorithms [82].
+Another source of information of great interest is represented by the
+actions that beekeepers perform on the hives, such as feeding, harvest­
+ing, applying treatments against diseases, and their effects on the colony
+[71]. The latest precision beekeeping systems provide the same infor­
+mation in digital format that beekeepers would have recorded during a
+traditional visual inspection, allowing to reduce the number of seasonal
+visits to the apiary.
+In [3] the main commercial solutions for precision beekeeping are
+analysed. The Israeli company Beewise created container-type hives
+with 24 colonies inside, equipped with a system that can get every single
+frame and take a picture of it. The Beehold system, on the other hand,
+uses sensors placed inside each frame, capable of processing a digital
+image and determining the content of each single cell.
+There are few studies on the prediction of the future conditions of the
+hives using statistical methods. In Ref. [25] the authors used a
+Long-Term Memory Algorithm (LSTM) to anticipate temperature drops
+in hives, while in Ref. [71] the authors use the time-varying Vector
+region of Saudi Arabia, Adgaba et al. [80] mapped the spatio-temporal
+distribution of bee forage using GIS. Specifically, the data was stored
+and processed using the Trimble GPS supported with ArcGIS10 software
+program. Subsequently, the data was used to estimate frequency, den­
+sity, abundance and diversity of the species present and above all their
+apicultural value. Furthermore, Remotely Sensed Satellite Image was
+obtained and processed using the Hopfield Artificial Neural Network
+technique. The results clearly showed the distribution of flowering
+plants and their area in the study site, helping to estimate area coverage
+of the different species, the honey production potential and the expected
+flowering period. Migratory beekeepers can be helped in evaluating the
+available resources in different times and places.
+In [81] a model to map monthly nectar and pollen production via
+land cover maps was developed to better manage floral resources for
+bees. It can contribute to management decisions such as the location of
+the hives depending on floral resources and where nectar limited areas
+may be found. It can also contribute to planning areas for bee protection.
+Autoregressive Models (tvVAR) to make 1-, 3-, and 7-day forecasts of
+internal hive variables (temperature, relative humidity, and mass). In
+Ref. [5] a prediction model capable of estimating the volume of bee
+outflows and inflows per hour, which simulates the dependence between
+environmental conditions and bee activity was developed.
+5. Conclusions
+The numerous papers published in the period 2015–2023 taken into
+consideration in this study demonstrate that the future of beekeeping is
+digital; it is therefore necessary to implement the various monitoring
+systems for the remote and optimized management of bee colonies.
+These systems may help to accurately predict the hives’ internal vari­
+ables, thus reducing the beekeeper’s response time to events related
+with the internal conditions with positive economic consequences.
+The health status of the hives can be monitored through the use of
+sensors to detect temperature, relative humidity, sounds, images,
+weight, etc. Each parameter alone can provide useful indication, how­
+ever, several parameters simultaneously detected allow to have a com­
+plete view of what is happening in the hive, as evidenced by the studies
+in which complex forecasting models are built.
+Finally, some recommendations for future studies emerge from this
+literature review.
+Marchal et al. [84] underlined that new sensors are needed to study
+the multifactorial impact of environmental stressors on bee colony
+health, such as a predator counter. Indeed, predators such as hornets
+(Vespa spp.) have a significant impact on honeybee populations in
+Europe and eastern Asia, but there is a lack of quantitative data on the
+relationship between predation and parameters characterizing colonies.
+Correlating hornet predation pressure with bee colony health metrics
+may provide important answers for developing control strategies for
+such aggressors.
+Remote sensing and the application of sensors will have to be used in
+synergy for better territorial planning of the beekeeping monitoring and
+surveillance activity, useful for defining the traceability of honey pro­
+duction and protecting its quality.
+The use of precision beekeeping will make it possible to counteract
+the negative impact of climate change on the life of bees. Furthermore,
+the introduction of artificial intelligence with specific algorithms will
+make it possible to reduce the use of pesticides which represents one of
+the threats to the survival of the bee colonies.
+
+

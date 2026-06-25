@@ -1,0 +1,814 @@
+The technical execution, adequacy of earlier and current solutions and development
+perspectives are analysed to prioritise different challenges for PB. The development of
+
+Keywords:
+
+decision support systems, which is usually a stumbling block in Precision Agriculture, is
+
+Precision Beekeeping
+
+suggested to be a mid-term task. In the long term, specific DSS-controlled electronic de-
+
+Precision Apiculture
+
+vices should be developed to enable new functionalities for PB. Specific classes of actors are
+
+Decision support
+
+proposed to operate within future PB systems for the automatic execution of suggestions
+
+Honey bee
+
+made by decision support systems, as well as for diagnostic purposes.
+PB systems should be optimised by searching for appropriate combinations of different
+
+Sensors
+Monitoring
+
+sensors, and corresponding decision support systems must provide convenient, reliable
+and cost efficient solutions. The development and specification of PB systems should
+consider business interests, distance to the apiary, expected risks and other peculiarities.
+
+1.
+
+Introduction
+
+Precision Agriculture (PA) methods have been developed and
+adapted for a number of agriculture-related sub-branches
+such as Precision Farming, Precision Livestock Farming, Precision Viticulture, Precision Horticulture, and Precision
+
+Forestry (Zacepins, Stalidzans, & Meitalovs, 2012; Zacepins &
+Stalidzans, 2013).
+Recently, Precision Beekeeping (PB) or Precision Apiculture
+has been defined as an apiary management strategy based on
+the monitoring of individual bee colonies to minimise
+resource consumption and maximise the productivity of bees
+(Zacepins et al., 2012). The PB approach aims to reduce the
+
+stress and unnecessary activities of bee colonies as well as the
+waste of resources. This is achieved through the timely and
+adequate reaction of beekeepers at the individual colony level
+in cases of necessity. The aim of the proposed solution is not
+to replace but rather to support the beekeeper, who will always remain the crucial factor in the good management of
+honey bees.
+How could the adaptation of PA methods help in
+beekeeping? There are different tasks for PB at the bee colony
+and apiary scales both in passive and active periods of honey
+bee colony development (Ambrose, 1992; Schmickl &
+Crailsheim, 2004; Stalidzans & Berzonis, 2013). It would be
+an industrial advantage to remotely detect at colony level:
+ developmental states of bee colonies (Stalidzans &
+Berzonis, 2013);
+ events that may require the beekeeper's action, including
+swarming/pre-swarming state, extreme nectar flow,
+queenless state, broodless state, dead colony, starving, and
+first cleaning flight in spring;
+ diseases, including colony collapse disorder (CCD) (CoxFoster et al., 2007; Van Engelsdorp, Hayes, Underwood, &
+Pettis, 2008).
+While the first and second groups of diagnostics tasks are
+mostly interesting for a particular beekeeper, the early diagnostics of disease, particularly infectious disease, can prevent the losses of bee colonies across wider areas. It would be
+very important to be able to detect and follow the dynamics of
+CCD (Cox-Foster et al., 2007; Van Engelsdorp et al., 2008) and
+diseases such as varroosis. Insights into the dynamics of disease spread and other problems, such as those that may be
+associated with global warming, could be achieved if the daily
+activities of many colonies are recorded and stored over
+several years (Mezquida & Martinez, 2009). Early disease diagnostics would also reduce the contamination of bee products with different residues of active substances used for
+disease treatment.
+PB is an emerging research direction that is supported by
+scientists from different countries. The ICT-AGRI (ICT-AGRI
+Secretariat, 2013) ERA-net consortium in the European Union
+has supported a project called “ITApic: Application of information
+technologies in Precision Apiculture” during 2013e2016 (ITAPIC
+Latvia, 2013). Another project entitled “The Swarmonitor”
+aims to develop a diagnostic tool for honey bee colonies by
+monitoring vibrations in the hive (Swarmonitor, 2014). These
+types of projects will facilitate the implementation of PB in the
+future, but there are still many challenges for the successful
+implementation of PB into beekeeping practices.
+The aim of this paper is to analyse the current status,
+challenges and development perspectives of Precision
+Beekeeping. Similarly to the three phase cycle of Precision
+Agriculture (Terry, 2006, p. 224), Precision Beekeeping can also
+be split and analysed in three phases: data collection (Section
+2 of this article), data analysis (Section 3) and application
+(Section 4) (Zacepins et al., 2012). During the data collection
+phase, measurements from bee colonies and the environment
+are collected. The data analysis phase draws conclusions
+regarding bee colony behaviour and activity trends based on
+measurement data, predefined models and expert knowledge.
+In the application phase, decisions are made and actions undertaken based on data analysis for improving apiary
+performance.
+
+2.
+Data collection phase in Precision
+Beekeeping
+The main objective of the data collection phase of PB is the
+development of real time and online tools for the continuous
+monitoring of apiaries. These tools operate at least partly at
+the individual colony level and use solutions based on automatic or automated information technology (Zacepins et al.,
+2012). Various technologies can be applied to monitoring the
+bee colony (Meikle & Holst, 2014), but only the most informative measurements are feasible for the PB approach. In this
+section, the available measurement approaches are described
+linked to their motivation and possible applications in
+detecting bee colony states. The peculiarities of data analysis
+are addressed in section three.
+The data collection process in PB can be classified into
+three groups (Human et al., 2013; Zacepins & Stalidzans, 2013):
+1) apiary-level parameters (meteorological parameters and
+video observation);
+2) colony-level parameters (temperature, humidity, gas content, sound, video, vibration of hive and weight);
+3) individual bee-related parameters (the number of
+incoming/outgoing bees, the number of bees in the hive
+entrance area).
+The colony-level parameters consist of the contribution of
+all or most of the colony-forming individuals (temperature,
+weight), while in the case of parameters based on individual
+bees (number of incoming/outgoing bees), the information
+about the colony is derived from the behaviour of a small
+number (for instance, 1% or less) of colony-forming members.
+Apiary-level monitoring
+Currently applied measurements: Apiary level observations can
+be carried out using meteorological parameters and video
+monitoring. Measurements of apiary-located meteorological
+parameters, such as wind, precipitation and light, may
+explain some peculiarities in colony behaviour. These parameters can be measured from a meteorological station or,
+less accurately, by video observation in which the movement
+of leaves and branches indicate wind and raindrops indicate
+rain. Video systems can record video when a motion or sound
+detector is activated to observe humans, cars, animals or
+other disturbing factors for the apiary (Meitalovs, Histjajevs, &
+Stalidzans, 2009). This type of information can increase the
+detailed understanding of colony-level measurements. For
+instance, the increased number of incoming and outgoing
+bees may be caused by external noise or the appearance of
+humans, which can be registered by the video cameras used
+for observing the apiary. An increase in the hive weight may
+be caused by rain that can be detected by video or a meteorological station.
+Technical execution: Apiary-level monitoring is not complicated due to the availability of many standard solutions used
+in agriculture and other sectors.
+Adequacy of current solutions: Video systems create huge
+amounts of raw data, and so video recordings can be activated
+only when they are needed or by user request. Meteorological
+information can also be collected from existing weather stations, as weather conditions usually are similar in larger areas
+and the measurements needed are not specific for beekeeping.
+Future development perspectives:
+ appropriate activation of data-intensive video observation
+to limit data transmission costs and electricity demand;
+ collaboration in the use of metrological stations;
+ application of rotating camera and zooming option to
+observe all colonies in the apiary.
+Colony-level monitoring
+Currently, the most popular methods of colony level monitoring are temperature, humidity, weight, sound, vibration
+and video monitoring (Meikle & Holst, 2014).
+Temperature monitoring of the colony
+Currently applied measurements: Continuous automatic temperature measurements have been described in many experiments (Chuda-Mickiewicz & Prabucki, 1996; Eskov & Toboev,
+2011; Fahrenholz, Lamprecht, & Schricker, 1989; Meitalovs
+et al., 2009; Stalidzans & Berzonis, 2013; Van Nerum &
+Buelens, 1997; Vornicu & Olah, 2004).
+The low cost of data collection, processing and data
+transfer from temperature measurement systems facilitates
+many applications of temperature measurements in
+beekeeping (Zacepins & Karasha, 2013). Based on temperature
+information, beekeepers and researchers have tried to detect
+colony states such as increased food consumption, the start of
+brood rearing, pre-swarming states, and death of the bee
+colony. Brood volume and winter cluster volume can also be
+identified by monitoring colony temperature. To determine
+brood volume, many sensors (one or even two per frame)
+should be placed into the hive (Linton, 2012). For example, the
+E-ruche project (Voskarides, Josserand, Martin, Novales, &
+Micheletto, 2013) uses this type of multi-point temperature
+measurement in the hive. Another approach is to use a single
+sensor, placing it above the upper hive body in the middle of
+horizontal cross section (Stalidzans & Berzonis, 2013),
+increasing convenience and reducing costs. In this case data
+analysis and decision support become more challenging. In
+any case, direct influence of ambient temperature on the
+measurements has to be assessed.
+Technical execution: Different technologies for measuring
+temperature are well established. Temperature sensors are
+usually robust and can easily survive even in the bee nest
+environment. Finally, the cost of temperature monitoring is
+relatively low.
+Adequacy of current solutions: many solutions are available
+on the market. Beekeepers should individually choose the
+appropriate solution depending on financial aspects and
+infrastructure available in the apiary location.
+
+Future development perspectives: Temperature monitoring
+seems to be developing towards wireless technologies and
+alternative energy sources such as solar energy. These systems should be simple to use and maintain, and remote access to data should also be granted.
+Weight monitoring of the colony
+Currently applied measurements: the weight of an inhabited hive
+(i.e., the sum of the weight of the box, combs with food stores
+and the bees) can be measured to monitor the different states
+of the colonies or to identify several events:
+ the occurrence of nectar flow during the foraging season
+(start and end of nectar flow) or daily gain in nectar stores
+(Human et al., 2013; Linton, 2012; Meikle, Rector, Mercadier,
+& Holst, 2008; Okada, Akamatsu, & Iwata, 2012);
+ consumption of food during non-foraging periods (Seeley &
+Visscher, 1985);
+ the occurrence of swarming events through a decrease in
+the hive weight (Linton, 2012; Meikle et al., 2008);
+ estimation of the number of foragers (Linton, 2012).
+Technical execution: There are two ways of measuring the
+weight of the colony: first, automatic measurements can be
+made using industrial scales, which allows for the continuous
+measurement of the bee colony weight; and second, simpler
+scales can be used to take measurements manually. Continuously operating scales are more expensive than noncontinuous scales at the same measurement accuracy.
+Weather influence should be taken into account because
+wooden boxes absorb moisture and thereby bias weight
+measurements (Meikle et al., 2008). The use of Styrofoam
+boxes is recommended for more accurate weighing. In the
+case of wooden hives, it is recommended that the changes in
+weight of an empty hive (with frames and honey but no bees)
+are taken into account to clarify the mass changes due to
+environmental effects such as humidity and wind.
+Adequacy of current solutions: A number of dedicated
+weighing systems for beekeeping (Human et al., 2013),
+including Beewise (BeeWise, 2013), BeeWatch (BeeWatch
+Team, 2013) and CAPAZ (CAPAZ team, 2013), indicate the
+applicability of this approach. These systems can be used in
+remote monitoring of hives by communicating weight values
+using SMS technology accessible from any mobile phone. Due
+to their relatively high price, the continuous scales used in
+these systems are not of much interest to beekeepers. In
+addition, the mass resolution for measurements made using
+Beewise and CAPAZ is only 100 g, which is not sufficient for
+monitoring colonies during the passive state (winter period)
+when nectar is not harvested and the daily changes in mass do
+not exceed 100 g.
+Several interesting initiatives have been set up to determine the nectar flow and share the information with other
+beekeepers who use Web systems, demonstrating the interest
+in the exchange of information among beekeepers:
+ http://biavl.volatus.de/bsm0/BSM.html# e this Web system monitors colonies from different Nordic countries,
+including Denmark, Sweden, Norway, Latvia and Germany
+(Honningmeteret, 2012);
+ http://www.vdrb.ch/service/waagvlker.html e this open
+website enables all users to see colony mass changes in
+Switzerland;
+ http://honeybeenet.gsfc.nasa.gov e the NASA Goddard
+Space Flight Centre has initiated a project in which the
+daily weighing of hives by volunteer beekeepers are
+merged with satellite data (Nightingale, Esaias, Wolfe,
+Nickeson, & Ma, 2008).
+Future development perspectives: The high costs and low accuracy of continuously loaded electronic scales limit their
+application. Moreover, the manual weighing of colonies is too
+laborious to perform at the industrial scale.
+As the dynamics of weight changes is most important, less
+precise indirect weight determination methods like vibration
+ n, & Gil-Ribes,
+response analysis (Castro-Garcı́a, Blanco-Rolda
+2011; Oveisi, Minaei, Rafiee, Eyvani, & Borghei, 2012) or other
+methods could be developed.
+Sound monitoring of the colony
+Currently applied measurements: Audio signals and audioprocessing techniques can be applied to estimate bee behaviour (Dietlein, 1985; Eskov & Toboev, 2010; Ferrari, Silva,
+Guarino, & Berckmans, 2008; Mezquida & Martinez, 2009).
+Ferrari proposed an acoustic method for predicting the
+swarming period, based on the labelling of sounds. Swarming
+is indicated by an increase in the power spectral density at
+approximately 110 Hz. When the bees are beginning to swarm,
+the sound is augmented in amplitude and frequency to 300 Hz
+and, occasionally, a rapid change occurs from 150 Hz to 500 Hz
+(Ferrari et al., 2008).
+Mezquida and Martinez (2009) presented a platform for
+beehive sound monitoring. The goal of the platform is to make
+it possible to store information about the swarm's activity by
+building a global net of monitored hives covering apiaries with
+different climates, races and managements.
+Eskov and Toboev (2010) proposed a method of analysis of
+non-stationary acoustic processes. The method is based on
+recurrent integration, which allows the basic trends in the
+time structure of the noise to be analysed. The method was
+evaluated during the investigation of the relations between
+the changes in the physiological states of bee colonies and the
+amplitudeetimeefrequency structure of acoustic noise that
+they generated.
+The analysis of the sound of flying bees near the beehive
+entrance to assess the productivity of the beehive has also
+been proposed (Brundage, 2012).
+Several commercial devices for sound monitoring have
+been proposed. As early as 1959, the sound analyser “Apidictor” (Woods, 1959) was presented. In addition to swarming
+detection, it is claimed that the “Apidictor” could be used to
+detect the acceptance of a new queen, queen failure (drone
+breeding) and the health of colonies during the winter.
+Other examples of patented devices include the honey bee
+acoustic recording and analysis system for monitoring hive
+health (Bromenshenk, Henderson, Seccomb, Rice, & Etter,
+2007) and the acoustic sensor for beehive monitoring
+(Brundage, 2012). Methods and devices for identifying
+different species of honeybees have been described (Howard,
+Buchanan, & Kenneth, 1989).
+Technical execution: Sound measurement itself is not a
+complicated task but the location of the sensor and the influence of non-bee noises from the environment should be
+analysed. It is also important to determine the correct frequency at which bee colony sound monitoring can be performed. The processing of measured sound is a serious
+computational task.
+Adequacy of current solutions: Many devices and methods
+have been developed for sound analysis but they are not
+widely applied in industrial beekeeping. So far, the solutions
+seem to work only in the hands of researchers. The reason for
+this may be the large stochastic component in the buzz of a
+colony and the complexity of sound interpretation.
+Future development perspectives: Generally sound seems to
+be a promising research direction in the analysis of insects
+and similar organisms (Mankin, 2011; Mankin, Hagstrum,
+Smith, Roda, & Kairo, 2011). More research on sound analysis in beekeeping-related issues seems to be necessary as the
+currently proposed methods are not applied in practice
+despite the reports of their successes since 1959.
+Other colony level monitoring methods
+In addition to monitoring temperature, weight, sound and
+video, it is also possible to monitor the humidity, vibrations
+and gas contents of the hive.
+Automatic air humidity measurement systems for colony
+activity monitoring (Human, Nicolson, & Dietemann, 2006;
+Meitalovs et al., 2009; Vornicu & Olah, 2004) are usually extensions of temperature measurement systems. Compared to
+the temperature sensors, humidity sensors are more expensive and have to be kept clean and protected from bees
+because the water vapour cannot overcome wax or propolis to
+reach the sensing element. Any effect of these materials on
+temperature measurements is likely to just be a lag effect.
+Bencsik showed that a set of statistically-independent
+instantaneous vibration signals of honeybees can be identified and monitored by means of a simple transducer secured
+to the outside wall of a hive, allowing swarming prediction
+several days in advance. The output of this monitoring
+method could be used to provide other signatures that are
+highly specific to other physiological processes in honeybees
+(Bencsik, Baxter, Lucian, Romieu, & Millet, 2011). The “Swarmonitor” (Swarmonitor, 2014) project aims to develop a tool
+for the diagnostic monitoring of honey bee colonies by
+monitoring vibrations in the hive.
+Oxygen and carbon dioxide content in the bee nest have
+been measured in some experiments (Southwick, Roubik, &
+Williams, 1990; Van Nerum & Buelens, 1997) because both
+gases are involved in metabolism. Nonetheless, automatic gas
+measurements are too expensive to compete with temperature measurements. Gas content measuring devices need
+controlled air flow, which may influence the microclimate of
+the bee nest.
+Individual bee-related parameters
+Individual bee monitoring approaches aim to use video systems or bee counters to observe the individual bees around
+the hive entrance (Campbell, Mummert, & Sukthankar, 2008;
+Liu, Leonard, & Feddes, 1990).
+Video monitoring of the colony
+Currently applied measurements: Bee colonies can be monitored
+using direct video observations. With video, it is possible to
+monitor the hive entrance for the flight and other activities of
+a honey bee colony, which is an important indicator of the
+strength and condition of the hive. Video monitoring of the
+colony can be used to count incoming and outgoing bees
+(Campbell et al., 2008), which can help in the discovery of
+unusually active or inactive colonies and swarms or the
+inference of the presence of CCD and diseases like nosema,
+chalkbrood, stonebrood, or European foulbrood. Video observation of the landing area can be used to detect signs of
+robbing, swarming and bearding (Linton, 2012).
+Liu also developed a computer-based system for studying
+honeybee behaviour (Liu et al., 1990). The main function of
+this system is to count the number of bees moving in and out
+of a hive and to determine their direction of movement. To
+correlate bee activity with environmental factors, the system
+also monitors the temperature inside and outside the hive as
+well as solar radiation, humidity, wind speed, and the weight
+of the hive. The system also shows the potential for studying
+bee movement inside hives during an overwintering period, as
+the infrared sensor assembly can be installed inside a hive as
+well as at the hive entrance.
+Technical execution: Video monitoring of the colony is not
+complicated due to the availability of solutions used in other
+sectors. Though bee recognition algorithms are well developed, they require significant computational power.
+Adequacy of current solutions: Existing solutions are targeted
+to observe one hive with a video system. It is not economically
+feasible to equip all hives with video cameras due to the huge
+amount of data generated. However, even the observation of
+one hive can shed light on the apiary state.
+Future development perspectives: The use of rotating cameras
+and zooming options can be used to observe all individual
+colonies in the apiary with a single device. The development
+of the video system should include an analysis option so the
+beekeeper can be sent only the analysed data rather than the
+raw data or pictures.
+Bee counters
+
+Currently applied measurements: Bee counting can be done not
+only with video systems but also with specific mechanical and
+electronic devices called bee counters. The number of bees
+leaving and returning to the hives is the main measurement.
+These devices should be placed in the hive entrance to obtain a
+daily read-out of colony foraging activity. Bee counters can be
+used to monitor colony activity, peak flight times, presence of
+pesticides, the impact of weather on flight activity, swarms,
+percent return rates, the impact of chemical release, and other
+changes in flight. Photoelectrical counting of outgoing and
+incoming honey bees was already proposed in 1969 (Spangler,
+1969). So far the most popular device used in research applications is the infrared detector-based BeeSCAN (Struye, Mortier,
+Arnold, Miniggio, & Borneck, 1994), which is produced by Lowland Electronics bvba in Belgium (Lowland electronics, 2013).
+Technical execution: The bee counter is usually a
+microprocessor-controlled device located in front of the hive
+entrance and monitors all bee activity going in and out of the
+
+hive. Mechanical or electronic counters consist of several
+tunnels or openings that each have sensors to determine
+whether the bees are coming or going.
+Adequacy of current solutions: All mechanical and electronic
+bee counters have a number of single bee sized passage
+channels in contrast to video based systems. Independent on
+their number, they are altering at least the air movement,
+removal of dead bees from the hive and probably some other
+bee activities. At the same time, devices are well tested and
+deliver reliable results.
+Future development perspectives: The devices without moving
+parts have better propects because of lack of maintenance
+issues. At the same time the use of channels is a drawback
+because it changes the hive entrance area and requires the
+cleaning of channels. Easy data processing of bee counters
+makes possible easy integration in larger control systems
+(Bromenshenk, Seccomb, Rice, & Etter, 2004).
+Future development of data collection systems
+
+A number of PB-related parameters can be measured or
+observed. For the implementation of measurements, various
+technologies and methods can be applied, including data logging and development of wired or wireless sensor networks.
+The costs of sensors and the robustness and convenience
+of their use seem to be critical for their future applications in
+industrial and hobby beekeeping. For instance, temperature
+sensors are robust and are not disturbed much by wax,
+propolis or honey in the hive. By contrast, humidity, gas,
+sound and some other sensors need to be cleaned or even
+replaced when they become contaminated.
+It is also important to develop standardised ways of
+installing particular sensors or their placement during
+installation (Meikle & Holst, 2014).
+Data transfer can strongly influence the convenience and
+operational costs of the system. Therefore, an important
+question is the proportion of gained knowledge compared to
+the costs of hardware and software used in measurement
+collection, data processing costs and communication costs.
+Wired sensor networks are relatively cheap but can be
+impractical in use. Wireless data collection from remote locations is more convenient and has become economically
+feasible in the last decade. The application of wireless sensor
+networks may also facilitate the development of PB (Dı́az,
+ rez, Mateos, Marinescu, & Guerra, 2011; Elsts, Balass,
+Pe
+Judvaitis, & Selavo, 2012; Elsts, Balass, Judvaitis, Zviedris,
+et al., 2012; Mezquida & Martinez, 2009; Morais et al., 2008).
+The energetic demand of different solutions may play an
+important role if a centralised electrical supply is not available. Solar or wind power would be a good support for travelling beekeeping methods in which remote data collection
+has even higher value (Alippi & Galperti, 2008; Gaudette,
+Hanumaiah, Vrudhula, & Krunz, 2012).
+Data analysis phase in Precision
+Beekeeping
+Currently, researchers and individuals view monitored data
+and correlate it with the colony status (state) by inspecting the
+hive. Only after the meaning of the data becomes wellunderstood can automated analysis and recognition algorithms be developed for data interpretation, which can then
+be used to inform the beekeeper of the colony state (Linton,
+2012). Recognition rules have to be tested for statistical significance in connection with the resolution and accuracy of
+the measurements. This section concentrates on the analysis
+of the bee colony measurements described in section two.
+The data analysis phase is generally the stumbling block in
+the adoption of Precision Agriculture (McBratney, Whelan,
+Ancev, & Bouma, 2005). In beekeeping, there have been
+several attempts to analyse the data to detect the states of preswarming (Bencsik et al., 2011; Ferrari et al., 2008; Meitalovs
+et al., 2009) and broodlessness (Stalidzans & Berzonis, 2013),
+the start of brood rearing during the winter (Zacepins,
+Meitalovs, Komasilovs, & Stalidzans, 2011) and the developmental period of a colony (Stalidzans & Berzonis, 2013).
+While developing data analysis software, it is important to
+clarify where analysis should take place. It is possible to
+analyse data at the hive, in the apiary, on the beekeeper's
+computer or on the internet. When wireless systems are used,
+power consumption can be greatly reduced if the data are
+analysed close to the sensor because less data must be sent
+along the communications channel. The use of solar batteries
+and fairly powerful microprocessor data analysis in the apiary
+is becoming a realistic scenario (Linton, 2012).
+Important states of the bee colony to be detected
+
+The most valuable desired result of data analysis in the PB
+approach is the detection of critical colony states. The
+cheapest and most reliable combinations of measurements
+and data analysis methods have the greatest potential for use.
+
+Annual state
+
+Temperature measurements above the upper body of the hive
+have been suggested for automatic determination of the five
+development periods of the annual cycle of bee colonies: (1)
+winter brood rearing, (2) spring brood rearing, (3) summer
+brood rearing, (4) autumn brood rearing and (5) autumn
+broodless period (Stalidzans & Berzonis, 2013). This knowledge can help in synchronising the beekeeper's activities with
+the developmental stage of individual bee colonies in apiaries.
+A system for temperature-based estimation of indoor and
+outdoor brood rearing during the winter has been reported
+(Zacepins et al., 2011).
+
+Intensive nectar flow
+
+Electronic scales give a good assessment of the intensity of
+nectar flow and indicates when it is necessary to provide the
+colonies with additional supers (Human et al., 2013). This
+becomes very important if the bee colonies are located over a
+large area and frequent visits are costly. Another important
+situation is the sudden start of intensive flow as in the case of
+honeydew flow (Human et al., 2013).
+
+Death of colony
+
+The integrity of the beehive and either the absence or death of
+the bee colony in the hive can be easily detected directly or
+indirectly by all the parameters discussed in the data
+
+collection section. The disappearance or death of the bee
+colony can be registered if the average temperature in the hive
+is equal or very close to the ambient temperature (Zacepins,
+2012), average air humidity and gas concentrations are equal
+to the ambient ones, weight remains constant, no bees enter
+or leave the colony, and no sound or vibration of a living colony can be detected. Disturbance by direct solar heating has to
+be avoided or kept in mind, especially for temperature and
+humidity measurement interpretation. Early detection and
+registration of the death of an individual colony can be valuable information for beekeepers, enabling fast reaction to
+prevent further losses if necessary. The simultaneous death of
+several colonies may be a result of extreme weather conditions, demolition, CCD or diseases, such as varroosis.
+Swarming
+
+The automatic remote detection of swarming-related activities would have a large impact on beekeeping. The detection
+of the pre-swarming state of a colony is a popular tool for
+avoiding the loss of bees (Esch, 1967; Woods, 1959) when part
+of the bee colony leaves the hive, dramatically reducing the
+productive potential of the colony. The earliest electronic
+swarming detection system based on sound analysis was
+“Apidictor,” which was “in regular use” by Woods (1959),
+indicating the age of the automatic swarming detection idea.
+Now, after 50 years, this and similar solutions do not seem to
+exist on the market. Analysis of sound has been developed
+further but practical applications are still missing (Eskov &
+Toboev, 2010). Further research has proposed the combined
+measurements of sound, temperature and humidity (Ferrari
+et al., 2008) for the detection of the pre-swarming condition.
+Intensive data analysis is also required in this case. A system
+with video, temperature and humidity measurements was
+developed to clarify the best placement for temperature and
+humidity sensors used in detecting the pre-swarming state
+(Meitalovs et al., 2009). Unfortunately, all these attempts lack
+extensive experiments and statistics about the reliability of
+these systems, and further research is needed. Swarming can
+also be identified by the weight of a colony because prime
+swarms average about 16 000 worker bees (Winston, 1992).
+
+Broodless state
+
+The automatic detection of broodless state of a colony can
+help the beekeeper to “repair” the colony by adding a queen,
+brood or uniting different colonies. Temperature measurements seem to be promising, as broods in the nest force the
+bees to maintain a stable high temperature (about þ35  C) and
+compensate for the changes in ambient temperature whereas
+the temperature in broodless colonies is much more dependent on the ambient temperature (Stalidzans & Berzonis,
+2013). Nonetheless, further experiments are needed.
+
+Queenless state
+
+The detection of a queenless state, characterised by a dronelaying queen and laying workers, would also be an important signal for the beekeeper as the broodless state is more
+easily detected from three weeks after the loss of queen.
+Those three weeks hardly reduce the potential of colony, but
+so far we have not found any promising research in this
+direction.
+
+Other states
+
+Starving can cause the death of a colony both in winter and
+summer. Starving risk can be assessed by weighing (Human
+et al., 2013). Bees could be easily saved by the addition of
+food by the beekeeper. Moreover, the first cleaning flight
+during spring in cold climates is important because increased
+brood rearing can be expected.
+Because traditional inspection by visual observation of bee
+colonies ignores many measurable parameters, new important bee colony states could be discovered after more
+continuous measurements of bee colonies become available.
+Decision support systems in PB
+
+One of the sub-systems of Precision Beekeeping is the Decision Support System (DSS), which can be used to automatically analyse and interpret various measurements of the
+colonies and the apiary. A similar term to DSS is expert systems (ES), which are software systems trying to replicate decision making of experts in a particular field.
+There are several beekeeping-related DSS and ES
+mentioned in the literature but they are mainly devoted to
+apiary level management without analysis of individual bee
+colonies and without real-time measurements. BEE AWARE
+(McClure, Tomasko, & Collison, 1993) is an ES for diagnosis
+and management of honey bee diseases, pests, parasites and
+predators that needs on-site inspection and analysis of bee
+colonies. Another ES for pest diagnosis has been developed in
+Greece (Mahaman et al., 2002). These systems could be used as
+
+tools for colony treatment after remotely detecting abnormalities in particular colonies or apiaries by PB methods. A
+DSS has been developed for minimisation of movement distances of apiaries between locations of melliferous crops and
+tree species (Vlad, Ion, Cojocaru, Ion, & Lorent, 2012) and for
+analysis of beekeeping sustainability in particular regions
+(Camargo et al., 2014; Estoque & Murayama, 2011). These ES
+and DSS may be valuable in practical beekeeping but in this
+review we concentrate on the PB approach that includes realtime data collection from individual bee colonies and data
+analysis based decision suggestions by corresponding DSS.
+Therefore PB is a different approach from the abovementioned beekeeping-related ES and DSS.
+Generally different algorithms and rules can be used in PB
+for computational support of the data analysis. Different bee
+colony states have different levels of importance and can be
+recognised with different levels of reliability. Therefore,
+depending on the importance of the detected state, the reliability of state detection and the importance of immediate
+action, DSS may be used to make some decisions automatically or to request the analysis of a proposed decision by a
+specialist in data processing or a beekeeper.
+DSS can process and combine different information such
+as video, weight, temperature and sound measurements of
+the colony. We propose dividing the PB DSS rules (decisions)
+into two main groups: individual rules and differential rules
+(Fig. 1). Individual rules (decisions) are based on single colony
+monitoring and only the measurements and data for one
+specific colony are accounted for. Differential rules (decisions)
+are based on comparison of colonies within one apiary or even
+comparing different apiaries in different locations.
+We found in the literature some individual colony-based
+PB decision support algorithms or rules expressed in a computer readable and executable form:
+ preswarming: computer readable clustering analysis algorithm based on temperature measurements (Kridi,
+Carvalho, & Gomes, 2014);
+ preswarming: principal components analysis-based
+detection by vibration measurements (Bencsik et al., 2011);
+ preswarming: frequency content shifts from about the
+range of 100e300 Hz to a higher frequency range of
+500 Hze600 Hz and frequency content shifts from about
+the range of 100e300 Hz to a higher frequency range of
+500 Hze600 Hz detected by sound and temperature measurements (Ferrari et al., 2008);
+ intensive brood rearing: summer temperatures above the
+bee nest of at least 30  C during day and night indicates an
+intensive brood rearing state of the colony, detected by
+temperature measurements (Stalidzans & Berzonis, 2013).
+The small number of published DSS rules does not prove
+that the PB is not mature. In our opinion some valuable
+computer readable PB rules are too obvious to be published in
+scientific literature. We propose some examples of obvious
+DSS rules below.
+Individual rules:
+ Death of colony: no buzz sound/vibration from the colony
+by sound measurements,
+ Death of colony: no moving bees at hive entrance during
+the active summer period for one day detected by video
+observation or bee counting (Struye et al., 1994),
+ Intensive brood rearing: changes of ambient temperature
+for more than ±10  C do not cause temperature changes
+above the bee nest more than ±2  C.
+Differential rules:
+ low nectar flow: all measured colonies at the same location
+have no increase in weight between two nights, detected
+by scales,
+
+ unspecified problems at individual colony: no increase in
+weight between two nights just in one colony when other
+colonies at the same location have weight increase detected by scales,
+ hive damage (demolition, theft, storm, …): fast and
+simultaneous convergence of temperature above the bee
+nest to the ambient one in some colonies detected by
+temperature measurements.
+
+3.3.
+Future development of data analysis and decision
+support systems
+Data analysis and DSS for use in PB are in an early stage of
+development. There have been some discoveries about the
+possible relations between captured data and events in colonies, but the results have not been widely tested in different
+subspecies of Apis mellifera L. or varying climatic circumstances, hive types or other factors. One interesting direction
+is the combination of different measurements in the analysis
+process. The application of data mining software to data
+measurement could give unexpected and counterintuitive
+results. In addition, the involvement of mathematical models
+seems to be a prospective basis for DSS.
+Besides DSS rules, the resolution and accuracy of measurements should be defined to avoid cases when suggestions
+from a good DSS algorithm fail because of low resolution and
+accuracy of measuring system.
+Effective DSS could also have a “pulling” effect on PB
+implementation, because reliable and easily operable DSS
+products should not be very expensive as they are software
+that are not specific for each apiary. Thus, the accessibility
+and efficiency of DSS may facilitate the purchase of data
+collection equipment and the implementation of PB.
+New methods for detecting the states of bee colonies can
+be developed through the interdisciplinary collaboration of
+bee specialists and engineers, physicists, mathematicians and
+information technology specialists to develop counterintuitive approaches. For instance, the weight dynamics of the hive
+could be detected by vibration and sound analysis that are less
+accurate but much cheaper than scales.
+Theoretically, each activity of the bees (including flight,
+defence, cleaning, and brood rearing) requires specific energy
+that is transferred into heat (resulting in temperature, humidity and gas content changes), sound (which can be
+detected by sound and vibration sensors) and other measurable activities. Thus, we expect many opportunities for the
+future development of new and affordable detection methods
+through interdisciplinary collaboration as well as modern
+measurement and data processing technologies (Table 1). It is
+assumed that a state can be identified if the state-specific
+deviation from the normal state can be registered by a
+particular measurement.
+In looking at the wide range of opportunities for combining
+data collection and data analysis tools, priorities must be set.
+It is possible to estimate the economic effect and return on
+investment of different devices in the first iteration assuming
+100% accuracy of predictions. Even with so optimistic an
+assumption, recognition of many states may not be economically feasible because of low benefit/cost ratio. That can be
+estimated by accounting for the benefit of state recognition for
+a particular bee colony, the expected frequency of particular
+states, the probability of correct remote recognition and the
+costs of PB system implementation (Zacepins, Stalidzans, &
+Karasha, 2013). It is possible that the recognition of some
+states will have no economic effect on the apiary and will
+probably never be widely used due to the financial aspects
+even if technical solutions are available. Some indications of
+different possibilities of state recognition by temperature,
+sound and video measurements and the importance of the
+state are suggested in Table 2.
+Application phase in Precision Beekeeping
+
+The third phase is application, and in the case of beekeeping
+this cannot be significantly automated because beekeeping is
+mostly performed manually. The literature reports only a few
+automated solutions that can be applied in practice.
+Automated indoor bee wintering (McCutchenon, 1984;
+Zacepins & Stalidzans, 2012) gives the opportunity to control
+the microclimate, which influences the behaviour of indoor
+wintered bees. The temperature can be changed remotely and
+can be increased if brood rearing must be stimulated or
+decreased to inhibit brood rearing (Stalidzans, Markovics,
+Krauze, Bilinskis, & Berzonis, 2007; Zacepins & Stalidzans,
+
+2012; Zacepins, Meitalovs, & Stalidzans, 2010). In addition to
+temperature, humidity and gas content can also be automatically controlled in bee wintering buildings to influence
+wintered colonies. Generally, the main advantages of indoor
+wintering in controlled microclimates are the possibilities of
+determining the winter conditions and ensuring that colonies
+are in predictable states in the early spring.
+An automatic, remotely controlled system for cooling or
+warming individual beehives depending on internal temperature and humidity measurements has been developed
+(Altun, 2012). Another automatic device, which seeks to prevent the swarming of the bee colony, automatically rotates
+the broodframe within the beehive by 180 every 24 h (Konya,
+2007). Other automatic systems used in the implementation of
+decisions, such as feeders, have been mentioned in the literature (Bromenshenk, Seccomb, Rice, & Etter, 2004).
+The future perspectives for automatic application of DSS
+suggestions seem to be limited in the near future because 1)
+only a small fraction of beekeeping operations can be automated, and 2) DSS is still in an early phase of development.
+Therefore, new PB-specific devices should be developed to
+facilitate the automatic implementation of DSS suggestions.
+One possible application could be an electronic device that
+is activated when the pre-swarming state is detected by DSS.
+The device would produce sufficient disturbances in vibration,
+sound or other parameters in an individual hive to prevent
+swarming until the beekeeper has been able to inspect the
+hive. The disturbance of the bees would cause losses of energetic and physiological resources but these should be well
+below the damage incurred by losing a swarm. Another DSS or
+beekeeper-controlled device could be an apiary or hive level
+alarm system against thieves or animals. Because hive opening or movement is easily detectable, an alarm system could
+make bee colonies more aggressive in protecting themselves
+against intruders especially if the intruders can be observed by
+an apiary level video.
+Another direction could be the development of diagnostic
+devices that would check the hypotheses developed by DSS.
+For instance, knocking-type vibrations at the hive could be
+imitated to test whether the response of colony is characteristic of a particular state of the colony. Such a diagnosis
+could support or contradict the initial hypothesis made by
+the DSS.
+Conclusions
+The currently available PB systems are not widely used,
+possibly due to a combination of several reasons: 1) the
+benefit/investment ratio is unclear; 2) the use is complicated;
+3) sensors and electronics require additional operational
+costs; and 4) there may be differences in beekeeping practices
+due to the subspecies of A. mellifera, climate and other
+peculiarities.
+Currently, the most developed and advanced phase of PB is
+data collection. Nonetheless, this phase will remain underdeveloped until the automated data analysis and decision
+support systems (DSS) can take advantage of available information to suggest operations to be applied by the beekeeper or
+by automatic systems built in the hive.
+From a mid-term perspective, DSS needs to be developed
+as a part of data analysis. Good DSS software could be a strong
+stimulus for PB implementation and, in developing DSS, it is
+critical to 1) develop beekeeper-friendly data analysis
+methods through DSS and its interface and 2) perform experiments under different genetic and geographical conditions to determine the adequacy of DSS conclusions and
+suggestions because many currently proposed data analysis
+and DSS solutions work only in the developer's lab. Data about
+the reliability of DSS would enable increasingly accurate estimations of the return on investment to decide whether to
+implement PB in practice.
+An important direction of investigation that covers both
+data collection and data analysis phases is the search for
+appropriate combinations of different sensors and corresponding DSS to yield informative and cost-effective solutions. For instance, cheap sensors for temperature and sound
+could be placed in each hive while more expensive sensors for
+weight or video capture could be placed just in selected hives.
+In addition, one video device could be used to monitor the
+whole apiary. In calculating the specification of PB systems,
+factors including business interests, distance to the apiary,
+expected risks and other peculiarities should be taken into
+account. Research priorities must also be set that account for
+the potential return on investment in different devices and,
+from the beekeeper's perspective, the benefits of state recognition for a particular bee colony, the expected frequency of
+particular states, the probability of correct remote recognition
+and the costs of PB system implementation.
+In the long-term, new automatic devices or actors should
+be developed to operate in combination with DSS. One direction would be the execution of suggestions made by the DSS,
+such as the recommendation to delay swarming or stimulate
+defensive behaviour. Another future direction is the development of diagnostic devices to test hypotheses made by DSS,
+such as giving a vibration or sound impulse to analyse bee
+colony dynamics and reactions in cases of suspected
+swarming states.
+More generally, the prospective implementation of the PB
+approach is determined by 1) convenience of PB technology
+implementation by a normal beekeeper and 2) the clear economic benefits by which, critically, the calculations of return
+on investment can be reliable. The second point requires
+scientific efforts to increase the reliability of data analysis and
+suggestions made by DSS. A low probability of correct conclusions and predictions made by DSS is the highest risk factor
+to successful PB implementation.

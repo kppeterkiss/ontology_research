@@ -1,0 +1,17 @@
+[
+  {
+    "id": "ONT_001",
+    "name": "Honey Bee",
+    "definition": "A stinging winged insect that lives in highly organized colonies and produces wax and honey."
+  },
+  {
+    "id": "ONT_002",
+    "name": "Bee Smoker",
+    "definition": "A device used in beekeeping to calm honey bees by puffing smoke into the hive."
+  },
+  {
+    "id": "ONT_003",
+    "name": "Wax Moth",
+    "definition": "A destructive hive pest whose larvae eat and ruin beeswax combs."
+  }
+]
