@@ -307,13 +307,17 @@ def run_optimized_pipeline():
 
             # BERT candidate search
             top_candidates = get_top_candidates_combined(mention, context, CURRENT_ONTOLOGY, top_n=2)
+            top_term_and_label_only_candidates = get_top_candidates_combined(mention, context, CURRENT_ONTOLOGY,combined=False, top_n=2)
+
 
             # --- STARTING THE ABLATION TEST ---
             # Call 1: With context and definition
             llama_with_ctx = ask_llama_nil_prediction(mention, context, top_candidates)
 
             # Call 2: ONLY the term and domain information, WITHOUT context
-            llama_no_ctx = ask_llama_nil_prediction_no_context(mention, top_candidates)
+            llama_no_ctx = ask_llama_nil_prediction_no_context(mention, top_term_and_label_only_candidates)
+
+            #llama_no_ctx = ask_llama_nil_prediction_no_context(mention, top_candidates)
 
             print(
                 f"   -> Test 1 (Ctx): {llama_with_ctx.get('decision')} | Test 2 (No-Ctx): {llama_no_ctx.get('decision')}"
