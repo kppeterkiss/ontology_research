@@ -12,6 +12,20 @@ PERFORMANCE_LOG_FILE = "pipeline_performance_log.jsonl"
 BERT_MODEL_NAME = 'all-MiniLM-L6-v2'
 LLM_MODEL_NAME = 'llama3.2'  # 3B model optimized for an 8GB Mac
 
+paul = True
+# Paul con fig:
+if paul:
+    INPUT_JSON = "beekeeping_corpus/xls/gold_standard_multi_word_noun_phrase_contexts 1.json"
+    ONTOLOGY_BASE_FILE = "ontology_rdf.json"
+    EXPANDED_ONTOLOGY_BASE_FILE = "p_expanded_ontology_base.json"
+
+    PERFORMANCE_LOG_FILE = "paul_pipeline_performance_log_llama3_2.jsonl"
+else:
+    SEED_ONTOLOGY_FILE = "beekeeping_corpus/glossaries/merged_glossary_terms.json"
+    INPUT_JSON = "filtered_paragraphs_test.json"
+    ONTOLOGY_BASE_FILE = "expanded_ontology_base.json"
+    PERFORMANCE_LOG_FILE = "pipeline_performance_log.jsonl"
+
 print("Initializing models...")
 embedding_model = SentenceTransformer(BERT_MODEL_NAME)
 

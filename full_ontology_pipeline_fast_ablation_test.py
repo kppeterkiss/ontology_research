@@ -5,12 +5,24 @@ from sentence_transformers import SentenceTransformer, util
 
 # KONFIGURÁCIÓ
 #SEED_ONTOLOGY_FILE = "seed_oontology.json"
-SEED_ONTOLOGY_FILE = "beekeeping_corpus/glossaries/merged_glossary_terms.json"
-INPUT_JSON = "filtered_paragraphs_test.json"
-ONTOLOGY_BASE_FILE = "expanded_ontology_base.json"
-PERFORMANCE_LOG_FILE = "pipeline_performance_log.jsonl"
+paul = True
+# Paul con fig:
+if paul:
+    #INPUT_JSON = "beekeeping_corpus/xls/gold_standard_multi_word_noun_phrase_contexts 1.json"
+    INPUT_JSON = "beekeeping_corpus/xls/gold_standard_single_noun_contexts 1.json"
+    ONTOLOGY_BASE_FILE = "ontology_rdf.json"
+    EXPANDED_ONTOLOGY_BASE_FILE = "p_expanded_ontology_base.json"
+
+    PERFORMANCE_LOG_FILE = "paul_pipeline_performance_log_llama3_2.jsonl"
+else:
+    SEED_ONTOLOGY_FILE = "beekeeping_corpus/glossaries/merged_glossary_terms.json"
+    INPUT_JSON = "filtered_paragraphs_test.json"
+    ONTOLOGY_BASE_FILE = "expanded_ontology_base.json"
+    PERFORMANCE_LOG_FILE = "pipeline_performance_log.jsonl"
 BERT_MODEL_NAME = 'all-MiniLM-L6-v2'
 LLM_MODEL_NAME = 'llama3.2'  # 8GB Mac-re optimalizált 3B modell
+import spacy
+nlp = spacy.load("en_core_web_sm")
 
 print("Modellek inicializálása...")
 embedding_model = SentenceTransformer(BERT_MODEL_NAME)
@@ -180,15 +192,16 @@ def ask_llama_nil_prediction_no_context(mention, candidates):
 
 
 # KIEGÉSZÍTETT NAPLÓZÁS: Mindkét eredményt beírja a JSONL-be
-def log_performance_dual_test(source_doc, mention, context, bert_candidates, llama_with_ctx, llama_no_ctx):
+def log_performance_dual_test(source_doc, mention, context, bert_candidates_ctx,bert_candidates_no_ctx, llama_with_ctx, llama_no_ctx):
     log_entry = {
         "doc": source_doc,
         "mention": mention,
         "context": context,
-        "bert_top_suggestions": [c["concept"]["name"] for c in bert_candidates],
+
 
         # 1. Teszt eredmény (Környezettel és definícióval)
         "test_1_with_context": {
+            "bert_top_suggestions": [c["concept"]["name"] for c in bert_candidates_ctx],
             "decision": llama_with_ctx.get("decision"),
             "matched_id": llama_with_ctx.get("matched_concept_id"),
             "reasoning": llama_with_ctx.get("reasoning")
@@ -196,6 +209,7 @@ def log_performance_dual_test(source_doc, mention, context, bert_candidates, lla
 
         # 2. Teszt eredmény (Csak a kifejezés és a domain infó)
         "test_2_no_context": {
+            "bert_top_suggestions": [c["concept"]["name"] for c in bert_candidates_no_ctx],
             "decision": llama_no_ctx.get("decision"),
             "matched_id": llama_no_ctx.get("matched_concept_id"),
             "reasoning": llama_no_ctx.get("reasoning")
@@ -248,6 +262,38 @@ def generate_strict_definition(mention, context):
         return {"generated_definition": f"A specialized term representing {mention}."}
 
 
+def extract_strict_sentence_window(mention, large_text, window_size=1):
+    """
+    Kivágja a kifejezés (mention) közvetlen környezetét (1 mondat előtte, 1 utána).
+    Ezzel megszünteti a kontextus-felhígulást a túl hosszú szövegeknél.
+    """
+    # Kis segítség a spaCy-nek, hogy a soremelések ne zavarják meg a mondatbontást
+    clean_large_text = large_text.replace('\n', ' ').replace('\r', ' ')
+    doc = nlp(clean_large_text)
+
+    sentences = list(doc.sents)
+    matched_sentence_idx = -1
+
+    # Megkeressük, melyik mondatban szerepel a vizsgált szó
+    for idx, sent in enumerate(sentences):
+        if mention.lower() in sent.text.lower():
+            matched_sentence_idx = idx
+            break
+
+    # Ha valamiért nem találja (pl. írásjel eltérés), biztonsági okból visszaadjuk az első 300 karaktert
+    if matched_sentence_idx == -1:
+        return large_text[:300] + "..."
+
+    # Kiszámoljuk az ablak határait (pl. matched_idx - 1 és matched_idx + 1)
+    start_idx = max(0, matched_sentence_idx - window_size)
+    end_idx = min(len(sentences), matched_sentence_idx + window_size + 1)
+
+    # Összefűzzük a kiválasztott mondatokat
+    window_sentences = sentences[start_idx:end_idx]
+    strict_context = " ".join([s.text.strip() for s in window_sentences])
+
+    return strict_context
+
 
 def run_optimized_pipeline():
     global new_concept_counter
@@ -286,7 +332,9 @@ def run_optimized_pipeline():
     for doc_id, mentions in doc_mention_map.items():
         print(f"\n--- FÁJL FELDOLGOZÁSA: {doc_id} ---")
 
-        for mention, context in mentions.items():
+        for mention, large_context in mentions.items():
+            context = extract_strict_sentence_window(mention, large_context, window_size=1)
+
             print(f"[{current_job_num}/{total_jobs}] Kifejezés: '{mention}'")
             current_job_num += 1
 
@@ -312,7 +360,7 @@ def run_optimized_pipeline():
                 f"   -> Teszt 1 (Ctx): {llama_with_ctx.get('decision')} | Teszt 2 (No-Ctx): {llama_no_ctx.get('decision')}")
 
             # Mentés a közös duális teljesítménynaplóba
-            log_performance_dual_test(doc_id, mention, context, top_candidates, llama_with_ctx, llama_no_ctx)
+            log_performance_dual_test(doc_id, mention, context, top_candidates,top_term_and_label_only_candidates, llama_with_ctx, llama_no_ctx)
 
             # --- ONTOLÓGIA ÉPÍTÉSE (Kizárólag az 1-es teszt döntése alapján!) ---
             decision = llama_with_ctx.get("decision", "NEW_CONCEPT")
