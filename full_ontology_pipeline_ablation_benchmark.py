@@ -52,7 +52,7 @@ if os.path.exists(ONTOLOGY_BASE_FILE):
         CURRENT_ONTOLOGY = json.load(f)
     print(f"[Inkrementális mód megkezdett ontológiából] Betöltve {len(CURRENT_ONTOLOGY)} korábbi koncepció.")
 elif os.path.exists(SEED_ONTOLOGY_FILE):
-    with open(ONTOLOGY_BASE_FILE, "r", encoding="utf-8") as f:
+    with open(SEED_ONTOLOGY_FILE, "r", encoding="utf-8") as f:
         CURRENT_ONTOLOGY = json.load(f)
     print(f"[Inkrementális mód seed-ből] Betöltve {len(CURRENT_ONTOLOGY)} korábbi koncepció.")
 else:
@@ -151,20 +151,21 @@ def extract_strict_sentence_window(mention, large_text, window_size=1):
 # 2. FÁZIS: BENCHMARK LEKÉRDEZÉSEK (KONTEXTUSSAL ÉS ANÉLKÜL)
 # =====================================================================
 def ask_llama_with_context(model_name, mention, context, candidates):
-    """1. TESZT VERZIÓ: Kontextussal és definícióval (Precíziós méhészeti példákkal)"""
+    """1. TESZT VERZIÓ: Kontextussal és definícióval (Szigorú fogalmi azonosság teszt)"""
     candidates_str = "".join(
         [f"- [ID: {c['concept']['id']}] Name: {c['concept']['name']} | Def: {c['concept']['definition']}\n" for c in
          candidates])
 
     prompt = f"""
-    You are an expert ontology engineer specializing in precision beekeeping, IoT apiculture, and honey bee biology.
+    You are a strict ontology engineer specializing in precision beekeeping.
 
     [TASK INSTRUCTIONS]
-    Evaluate if the target term corresponds exactly to one of the existing concepts or if it represents a fundamentally new entity (NIL prediction).
+    Evaluate if the target term represents the EXACT SAME CONCEPT (is a direct synonym or equivalent terms) as one of the existing options.
+    If the target term is a separate part, a component, or a related but distinct technology/metric, you MUST select "NEW_CONCEPT". Do NOT map related things together.
     Respond strictly in the required JSON format.
 
     [EXAMPLES]
-    Example 1 (EXISTING):
+    Example 1 (EXISTING - Direct Synonym):
     Target Term: "temperature probe"
     Context: "We inserted a digital temperature probe into the brood nest to monitor thermal changes."
     Existing database options:
@@ -174,12 +175,12 @@ def ask_llama_with_context(model_name, mention, context, candidates):
     {{
       "decision": "EXISTING",
       "matched_concept_id": "ONT_101",
-      "reasoning": "A temperature probe is a synonym and specific type of temperature sensor used for thermal monitoring."
+      "reasoning": "A temperature probe is functionally identical to a temperature sensor and represents the exact same concept."
     }}
 
-    Example 2 (NEW_CONCEPT):
-    Target Term: "acoustic sensor"
-    Context: "An acoustic sensor was deployed to capture the frequency of the colony buzz and predict swarming events."
+    Example 2 (NEW_CONCEPT - Related but NOT identical):
+    Target Term: "load cell"
+    Context: "The automated scale system uses a 200kg load cell to measure structural deformation under hive weight."
     Existing database options:
     1. [ID: ONT_101] Name: Temperature Sensor | Def: A hardware sensor used to measure the thermal conditions inside a beehive.
     2. [ID: ONT_102] Name: Weight Scale | Def: An electronic scale placed under the hive to track honey yield.
@@ -187,7 +188,7 @@ def ask_llama_with_context(model_name, mention, context, candidates):
     {{
       "decision": "NEW_CONCEPT",
       "matched_concept_id": null,
-      "reasoning": "An acoustic sensor measures sound frequencies, which is technologically distinct from temperature or weight tracking systems."
+      "reasoning": "A load cell is a sub-component used inside a weight scale, but it is a distinct hardware entity, not the scale itself."
     }}
 
     [ACTUAL TASK TO EVALUATE]
@@ -197,7 +198,7 @@ def ask_llama_with_context(model_name, mention, context, candidates):
     Existing database options:
     {candidates_str}
 
-    Task: Is "{mention}" exactly one of the existing concepts above? If the existing definitions do not cover this specific technology, biological entity, or metric, select "NEW_CONCEPT".
+    Task: Is "{mention}" the EXACT SAME CONCEPT as one of the existing options above? Select "NEW_CONCEPT" if it is merely a part, a component, or a related but distinct entity.
 
     Respond strictly in JSON format:
     {{
@@ -218,39 +219,40 @@ def ask_llama_with_context(model_name, mention, context, candidates):
 
 
 def ask_llama_without_context(model_name, mention, candidates):
-    """2. TESZT VERZIÓ: Kontextus NÉLKÜL (Precíziós méhészeti példákkal)"""
+    """2. TESZT VERZIÓ: Kontextus NÉLKÜL (Szigorú fogalmi azonosság teszt)"""
     candidates_str = "".join([f"- [ID: {c['concept']['id']}] Name: {c['concept']['name']}\n" for c in candidates])
 
     prompt = f"""
-    You are an expert ontology engineer building an ontology specifically for the PRECISION BEEKEEPING, SMART APICULTURE, AND IOT HIVE DOMAIN.
+    You are a strict ontology engineer building an ontology specifically for the PRECISION BEEKEEPING domain.
 
     [TASK INSTRUCTIONS]
-    Based solely on your general knowledge of smart apiculture and hardware/software systems used in hives, evaluate if the target term represents an existing option or a new concept.
+    Based solely on your knowledge of smart apiculture, evaluate if the target term represents the EXACT SAME ENTITY/CONCEPT as one of the existing options.
+    If the target term is a part, a sub-component, or just a related concept, you MUST select "NEW_CONCEPT".
     Respond strictly in the required JSON format.
 
     [EXAMPLES]
-    Example 1 (EXISTING):
-    Target Term: "load cell"
+    Example 1 (EXISTING - Direct Synonym):
+    Target Term: "telemetry module"
     Existing concepts in our database:
-    1. [ID: ONT_102] Name: Weight Scale
-    2. [ID: ONT_105] Name: LoRaWAN Gateway
+    1. [ID: ONT_104] Name: Communication Unit
+    2. [ID: ONT_105] Name: Hive Scale
     Expected Output:
     {{
       "decision": "EXISTING",
-      "matched_concept_id": "ONT_102",
-      "reasoning": "A load cell is the core electronic component used to build a smart hive weight scale."
+      "matched_concept_id": "ONT_104",
+      "reasoning": "A telemetry module acts as the communication unit responsible for transmitting data from the hive."
     }}
 
-    Example 2 (NEW_CONCEPT):
-    Target Term: "humidity sensor"
+    Example 2 (NEW_CONCEPT - Related but NOT identical):
+    Target Term: "internal battery"
     Existing concepts in our database:
-    1. [ID: ONT_102] Name: Weight Scale
-    2. [ID: ONT_105] Name: LoRaWAN Gateway
+    1. [ID: ONT_104] Name: Communication Unit
+    2. [ID: ONT_105] Name: Hive Scale
     Expected Output:
     {{
       "decision": "NEW_CONCEPT",
       "matched_concept_id": null,
-      "reasoning": "A humidity sensor tracking relative moisture is a distinct environmental sensor type not covered by scales or telecommunication hardware."
+      "reasoning": "An internal battery provides power to these devices but is a distinct physical electronic component, not a scale or communication unit."
     }}
 
     [ACTUAL TASK TO EVALUATE]
@@ -259,7 +261,7 @@ def ask_llama_without_context(model_name, mention, candidates):
     Existing concepts in our database:
     {candidates_str}
 
-    Task: Based solely on your knowledge of precision beekeeping, does "{mention}" represent the exact same concept as one of the options listed above? If it is a different tool, sensor, metric, or biological concept, select "NEW_CONCEPT".
+    Task: Based solely on your general knowledge of precision beekeeping, does "{mention}" represent the EXACT SAME CONCEPT as one of the options listed above? Select "NEW_CONCEPT" if it is a component, a part, or a related but separate entity.
 
     Respond strictly in JSON format:
     {{
@@ -391,15 +393,15 @@ def run_benchmark_pipeline():
 
         # 4. ONTOLÓGIA FEJLESZTÉSE (Kizárólag a legerősebb modell - Llama 3.1 - KONTEXTUSOS döntése alapján!)
         llama_3_1_main_decision = outputs_for_this_mention["llama3.1"]["with_context"].get("decision", "NEW_CONCEPT")
-        if llama_3_1_main_decision == "NEW_CONCEPT":
+
+        if append_to_ontology and llama_3_1_main_decision == "NEW_CONCEPT":
             print(f"   [!] Új koncepció elfogadva (Llama 3.1 alapján). Definíció generálása...")
             def_data = generate_strict_definition(mention, context)
             generated_def = def_data.get("generated_definition", f"A specialized term representing {mention}.")
             new_node = {"id": get_next_id(),"name": mention.title(),"definition": generated_def,"synonyms": []}
-            if append_to_ontology:
-                CURRENT_ONTOLOGY.append(new_node)
-                with open(ONTOLOGY_BASE_FILE, "w", encoding="utf-8") as f:
-                    json.dump(CURRENT_ONTOLOGY, f, indent=2, ensure_ascii=False)
+            CURRENT_ONTOLOGY.append(new_node)
+            with open(ONTOLOGY_BASE_FILE, "w", encoding="utf-8") as f:
+                json.dump(CURRENT_ONTOLOGY, f, indent=2, ensure_ascii=False)
     # Ha egy egész dokumentum összes szavát megvizsgáltuk az első 100-ból, elmentjük a progress-be# (A biztonság kedvéért a 100-as batch-en belül is mentünk haladást dokumentumonként)
     # Ez a rész ellenőrzi, hogy ez volt-e az utolsó feladat az adott cikkhez ebben a futásban
     remaining_in_doc = [j for j in test_jobs[idx:] if j["doc_id"] == doc_id]

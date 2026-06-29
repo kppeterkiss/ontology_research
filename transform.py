@@ -3,6 +3,16 @@ import json
 import pandas as pd
 from rdflib import Graph, RDF, RDFS, OWL, SKOS
 
+def camel_case_split(str):
+    words = [[str[0]]]
+
+    for c in str[1:]:
+        if words[-1][-1].islower() and c.isupper():
+            words.append(list(c))
+        else:
+            words[-1].append(c)
+    res= [''.join(word) for word in words]
+    return ' '.join(res)
 
 def rdf_to_concept_list(file_path, file_format="xml"):
     # Grafikon inicializálása és fájl beolvasása
@@ -35,8 +45,8 @@ def rdf_to_concept_list(file_path, file_format="xml"):
 
             # Szótár hozzáadása a listához
             concepts_list.append({
-                "id": f"RDF_{str(counter).zfill(3)}" ,
-                "name": label,
+                "id": label,#f"RDF_{str(counter).zfill(3)}" ,
+                "name": camel_case_split(label).replace('_', '').title(),
                 "uri": concept_uri,
                 "definition": definition
             })
