@@ -5,10 +5,10 @@ from sentence_transformers import SentenceTransformer, util
 
 # KONFIGURÁCIÓ
 #SEED_ONTOLOGY_FILE = "seed_oontology.json"
-SEED_ONTOLOGY_FILE = "beekeeping_corpus/glossaries/merged_glossary_terms.json"
+SEED_ONTOLOGY_FILE = "../beekeeping_corpus/glossaries/merged_glossary_terms.json"
 INPUT_JSON = "filtered_paragraphs_train.json"
-ONTOLOGY_BASE_FILE = "expanded_ontology_base.json"
-PERFORMANCE_LOG_FILE = "results/minilm_pipeline_performance_log.jsonl"
+ONTOLOGY_BASE_FILE = "../expanded_ontology_base.json"
+PERFORMANCE_LOG_FILE = "../results/minilm_pipeline_performance_log.jsonl"
 BERT_MODEL_NAME = 'all-MiniLM-L6-v2'
 LLM_MODEL_NAME = 'llama3.2'  # 8GB Mac-re optimalizált 3B modell
 
@@ -165,7 +165,7 @@ def log_performance(source_doc, mention, decision, matched_id, reasoning):
 # =====================================================================
 # JAVÍTÁS 2: DOKUMENTUM-SZINTŰ AGGREGÁCIÓS MOTOR + RECOVERY (CHECKPOINT)
 # =====================================================================
-PROGRESS_FILE = "pipeline_progress.json"
+PROGRESS_FILE = "../pipeline_progress.json"
 
 
 def load_progress():

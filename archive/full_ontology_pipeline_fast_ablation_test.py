@@ -3,46 +3,44 @@ import os
 import ollama
 from sentence_transformers import SentenceTransformer, util
 
-# CONFIGURATION
+# KONFIGURÁCIÓ
 #SEED_ONTOLOGY_FILE = "seed_oontology.json"
-SEED_ONTOLOGY_FILE = "beekeeping_corpus/glossaries/merged_glossary_terms.json"
-INPUT_JSON = "filtered_paragraphs_test.json"
-ONTOLOGY_BASE_FILE = "expanded_ontology_base.json"
-PERFORMANCE_LOG_FILE = "results/minilm_pipeline_performance_log.jsonl"
-BERT_MODEL_NAME = 'all-MiniLM-L6-v2'
-LLM_MODEL_NAME = 'llama3.2'  # 3B model optimized for an 8GB Mac
-
 paul = True
 # Paul con fig:
 if paul:
-    INPUT_JSON = "beekeeping_corpus/xls/gold_standard_multi_word_noun_phrase_contexts 1.json"
-    ONTOLOGY_BASE_FILE = "ontology_rdf.json"
+    #INPUT_JSON = "beekeeping_corpus/xls/gold_standard_multi_word_noun_phrase_contexts 1.json"
+    INPUT_JSON = "beekeeping_corpus/xls/gold_standard_single_noun_contexts 1.json"
+    ONTOLOGY_BASE_FILE = "../ontology_rdf.json"
     EXPANDED_ONTOLOGY_BASE_FILE = "p_expanded_ontology_base.json"
 
     PERFORMANCE_LOG_FILE = "paul_pipeline_performance_log_llama3_2.jsonl"
 else:
-    SEED_ONTOLOGY_FILE = "beekeeping_corpus/glossaries/merged_glossary_terms.json"
+    SEED_ONTOLOGY_FILE = "../beekeeping_corpus/glossaries/merged_glossary_terms.json"
     INPUT_JSON = "filtered_paragraphs_test.json"
-    ONTOLOGY_BASE_FILE = "expanded_ontology_base.json"
-    PERFORMANCE_LOG_FILE = "results/minilm_pipeline_performance_log.jsonl"
+    ONTOLOGY_BASE_FILE = "../expanded_ontology_base.json"
+    PERFORMANCE_LOG_FILE = "../results/minilm_pipeline_performance_log.jsonl"
+BERT_MODEL_NAME = 'all-MiniLM-L6-v2'
+LLM_MODEL_NAME = 'llama3.2'  # 8GB Mac-re optimalizált 3B modell
+import spacy
+nlp = spacy.load("en_core_web_sm")
 
-print("Initializing models...")
+print("Modellek inicializálása...")
 embedding_model = SentenceTransformer(BERT_MODEL_NAME)
 
-# 1. LOAD ONTOLOGY
+# 1. ONTOLÓGIA BETÖLTÉSE
 if os.path.exists(ONTOLOGY_BASE_FILE):
     with open(ONTOLOGY_BASE_FILE, "r", encoding="utf-8") as f:
         CURRENT_ONTOLOGY = json.load(f)
-    print(f"Loaded {len(CURRENT_ONTOLOGY)} existing concepts.")
+    print(f"Betöltve {len(CURRENT_ONTOLOGY)} meglévő koncepció.")
 elif os.path.exists(SEED_ONTOLOGY_FILE):
     with open(SEED_ONTOLOGY_FILE, "r", encoding="utf-8") as f:
         CURRENT_ONTOLOGY = json.load(f)
-    print(f"Loaded {len(CURRENT_ONTOLOGY)} existing concepts.")
+    print(f"Betöltve {len(CURRENT_ONTOLOGY)} meglévő koncepció.")
 else:
     CURRENT_ONTOLOGY = []
 
 
-# ID Counter
+# ID Számláló
 def get_next_id():
     if not CURRENT_ONTOLOGY: return "ONT_001"
     last_id = CURRENT_ONTOLOGY[-1]["id"]
@@ -51,20 +49,19 @@ def get_next_id():
 
 
 # =====================================================================
-# FIX 1: LEXICAL GATEKEEPER
-# Prevents duplicate new concepts
+# JAVÍTÁS 1: LEXIKÁLIS KAPUŐR (Megakadályozza a duplikált új koncepciókat)
 # =====================================================================
 def check_lexical_exact_match(mention, ontology):
     """
-    Checks at character level whether the term already exists.
-    If yes, returns it immediately, bypassing both the LLM and BERT.
+    Karakter szinten ellenőrzi, hogy a szó létezik-e már.
+    Ha igen, azonnal visszaadja, kikerülve az LLM-et és a BERT-et.
     """
     mention_clean = mention.lower().strip()
     for concept in ontology:
-        # Check the name
+        # Ellenőrizzük a nevet
         if concept["name"].lower().strip() == mention_clean:
             return concept
-        # Check synonyms, if present
+        # Ellenőrizzük a szinonimákat (ha vannak)
         if "synonyms" in concept:
             if any(s.lower().strip() == mention_clean for s in concept["synonyms"]):
                 return concept
@@ -72,7 +69,7 @@ def check_lexical_exact_match(mention, ontology):
 
 
 # =====================================================================
-# BERT SIMILARITY BASED ON TERM + CONTEXT
+# BERT HASONLÓSÁG KIFEJEZÉS + KONTEXTUS ALAPJÁN
 # =====================================================================
 def get_top_candidates_combined(mention, context, ontology, combined = True,top_n=2):
     if not ontology: return []
@@ -103,12 +100,12 @@ def get_top_candidates_combined(mention, context, ontology, combined = True,top_
     #else: scored_candidates.sort(key=lambda x: x["score"], reverse=True)
     return scored_candidates[:top_n]
 
+
 # =====================================================================
-# PHASE 3: TWO DIFFERENT LLM QUERIES FOR TESTING
+# 3. FÁZIS: KÉT KÜLÖNBÖZŐ LLM LEKÉRDEZÉS A TESZTHEZ
 # =====================================================================
 
-# VERSION 1: WITH CONTEXT
-# Current behavior
+# 1. VERZIÓ: KONTEXTUSOS (Az eddigi működés)
 def ask_llama_nil_prediction(mention, context, candidates):
     if not candidates:
         return {"decision": "NEW_CONCEPT", "matched_concept_id": None, "reasoning": "Ontology empty."}
@@ -147,19 +144,19 @@ def ask_llama_nil_prediction(mention, context, candidates):
         return {"error": f"Llama error: {str(e)}"}
 
 
-# VERSION 2: TEST PROMPT WITHOUT CONTEXT
+# 2. VERZIÓ: KONTEXTUS NÉLKÜLI TESZT PROMPT
 def ask_llama_nil_prediction_no_context(mention, candidates):
     """
-    New test function: receives only the term and the candidates,
-    but knows that the domain is beekeeping/apiculture.
+    Új teszt függvény: Csak a szót és a jelölteket kapja meg,
+    de tudja, hogy méhészeti (apiculture) domainről van szó.
     """
     if not candidates:
         return {"decision": "NEW_CONCEPT", "matched_concept_id": None, "reasoning": "Ontology empty."}
 
     candidates_str = ""
     for idx, c in enumerate(candidates, 1):
-        # We also pass ONLY the candidate names, not their definitions,
-        # so we can cleanly test the semantic relationship between terms.
+        # A jelölteknek IS csak a nevét adjuk oda, a definíciót nem,
+        # hogy tisztán a kifejezések közötti szemantikai kapcsolatot teszteljük!
         candidates_str += f"{idx}. [ID: {c['concept']['id']}] Name: {c['concept']['name']}\n"
 
     prompt = f"""
@@ -194,24 +191,25 @@ def ask_llama_nil_prediction_no_context(mention, candidates):
         return {"error": f"Llama error (No-context): {str(e)}"}
 
 
-# EXTENDED LOGGING:
-# Writes both results into the JSONL file
-def log_performance_dual_test(source_doc, mention, context, bert_candidates, llama_with_ctx, llama_no_ctx):
+# KIEGÉSZÍTETT NAPLÓZÁS: Mindkét eredményt beírja a JSONL-be
+def log_performance_dual_test(source_doc, mention, context, bert_candidates_ctx,bert_candidates_no_ctx, llama_with_ctx, llama_no_ctx):
     log_entry = {
         "doc": source_doc,
         "mention": mention,
         "context": context,
-        "bert_top_suggestions": [c["concept"]["name"] for c in bert_candidates],
 
-        # Test 1 result: with context and definition
+
+        # 1. Teszt eredmény (Környezettel és definícióval)
         "test_1_with_context": {
+            "bert_top_suggestions": [c["concept"]["name"] for c in bert_candidates_ctx],
             "decision": llama_with_ctx.get("decision"),
             "matched_id": llama_with_ctx.get("matched_concept_id"),
             "reasoning": llama_with_ctx.get("reasoning")
         },
 
-        # Test 2 result: only the term and domain information
+        # 2. Teszt eredmény (Csak a kifejezés és a domain infó)
         "test_2_no_context": {
+            "bert_top_suggestions": [c["concept"]["name"] for c in bert_candidates_no_ctx],
             "decision": llama_no_ctx.get("decision"),
             "matched_id": llama_no_ctx.get("matched_concept_id"),
             "reasoning": llama_no_ctx.get("reasoning")
@@ -219,16 +217,14 @@ def log_performance_dual_test(source_doc, mention, context, bert_candidates, lla
     }
     with open(PERFORMANCE_LOG_FILE, "a", encoding="utf-8") as f:
         f.write(json.dumps(log_entry, ensure_ascii=False) + "\n")
-
-
+#=====================================================================
+# JAVÍTÁS 2: DOKUMENTUM-SZINTŰ AGGREGÁCIÓS MOTOR + RECOVERY (CHECKPOINT)
 # =====================================================================
-# FIX 2: DOCUMENT-LEVEL AGGREGATION ENGINE + RECOVERY CHECKPOINT
-# =====================================================================
-PROGRESS_FILE = "pipeline_progress.json"
+PROGRESS_FILE = "../pipeline_progress.json"
 
 
 def load_progress():
-    """Reads the list of fully processed documents."""
+    """Beolvassa a már teljesen feldolgozott dokumentumok listáját."""
     if os.path.exists(PROGRESS_FILE):
         with open(PROGRESS_FILE, "r", encoding="utf-8") as f:
             data = json.load(f)
@@ -237,10 +233,9 @@ def load_progress():
 
 
 def save_progress(processed_docs_set):
-    """Saves the list of processed documents to disk."""
+    """Elmenti a feldolgozott dokumentumok listáját a lemezre."""
     with open(PROGRESS_FILE, "w", encoding="utf-8") as f:
         json.dump({"processed_docs": list(processed_docs_set)}, f, indent=2, ensure_ascii=False)
-
 
 def generate_strict_definition(mention, context):
     """Generates a crisp, distinctive definition to prevent over-generalization."""
@@ -267,84 +262,110 @@ def generate_strict_definition(mention, context):
         return {"generated_definition": f"A specialized term representing {mention}."}
 
 
+def extract_strict_sentence_window(mention, large_text, window_size=1):
+    """
+    Kivágja a kifejezés (mention) közvetlen környezetét (1 mondat előtte, 1 utána).
+    Ezzel megszünteti a kontextus-felhígulást a túl hosszú szövegeknél.
+    """
+    # Kis segítség a spaCy-nek, hogy a soremelések ne zavarják meg a mondatbontást
+    clean_large_text = large_text.replace('\n', ' ').replace('\r', ' ')
+    doc = nlp(clean_large_text)
+
+    sentences = list(doc.sents)
+    matched_sentence_idx = -1
+
+    # Megkeressük, melyik mondatban szerepel a vizsgált szó
+    for idx, sent in enumerate(sentences):
+        if mention.lower() in sent.text.lower():
+            matched_sentence_idx = idx
+            break
+
+    # Ha valamiért nem találja (pl. írásjel eltérés), biztonsági okból visszaadjuk az első 300 karaktert
+    if matched_sentence_idx == -1:
+        return large_text[:300] + "..."
+
+    # Kiszámoljuk az ablak határait (pl. matched_idx - 1 és matched_idx + 1)
+    start_idx = max(0, matched_sentence_idx - window_size)
+    end_idx = min(len(sentences), matched_sentence_idx + window_size + 1)
+
+    # Összefűzzük a kiválasztott mondatokat
+    window_sentences = sentences[start_idx:end_idx]
+    strict_context = " ".join([s.text.strip() for s in window_sentences])
+
+    return strict_context
+
+
 def run_optimized_pipeline():
     global new_concept_counter
 
     if not os.path.exists(INPUT_JSON):
-        print(f"Error: Missing '{INPUT_JSON}'")
+        print(f"Hiba: Hiányzik a '{INPUT_JSON}'")
         return
 
     with open(INPUT_JSON, "r", encoding="utf-8") as f:
         all_paragraphs = json.load(f)
 
-    # 1. RECOVERY: Load previous progress
+    # 1. RECOVERY: Korábbi előrehaladás betöltése
     processed_documents = load_progress()
     if processed_documents:
         print(
-            f"[RECOVERY ACTIVATED] Found previous run progress. {len(processed_documents)} articles are already done, skipping them."
-        )
+            f"[RECOVERY ACTIVATED] Találtam korábbi futási nyomot. {len(processed_documents)} cikk már kész, ezeket átugorjuk.")
 
-    print("Grouping data...")
+    print("Adatok csoportosítása...")
     doc_mention_map = {}
     for p in all_paragraphs:
         doc_id = p["doc_id"]
-        if doc_id in processed_documents:
-            continue
-        if doc_id not in doc_mention_map:
-            doc_mention_map[doc_id] = {}
+        if doc_id in processed_documents: continue
+        if doc_id not in doc_mention_map: doc_mention_map[doc_id] = {}
         for mention in p["matched_concepts"]:
             if mention not in doc_mention_map[doc_id] or len(p["text"]) > len(doc_mention_map[doc_id][mention]):
                 doc_mention_map[doc_id][mention] = p["text"]
 
     total_jobs = sum(len(mentions) for mentions in doc_mention_map.values())
     if total_jobs == 0:
-        print("\nNo new tasks to process.")
+        print("\nNincs új feldolgozandó feladat.")
         return
 
-    print(f"Grouping complete. A total of {total_jobs} tasks are waiting to be processed.")
+    print(f"Csoportosítás kész. Összesen {total_jobs} feladat vár elvégzésre.")
     current_job_num = 1
 
     for doc_id, mentions in doc_mention_map.items():
-        print(f"\n--- PROCESSING FILE: {doc_id} ---")
+        print(f"\n--- FÁJL FELDOLGOZÁSA: {doc_id} ---")
 
-        for mention, context in mentions.items():
-            print(f"[{current_job_num}/{total_jobs}] Term: '{mention}'")
+        for mention, large_context in mentions.items():
+            context = extract_strict_sentence_window(mention, large_context, window_size=1)
+
+            print(f"[{current_job_num}/{total_jobs}] Kifejezés: '{mention}'")
             current_job_num += 1
 
-            # Lexical gatekeeper check
+            # Lexikális Kapuőr ellenőrzése
             lexical_match = check_lexical_exact_match(mention, CURRENT_ONTOLOGY)
             if lexical_match:
-                print(f"   [->] Lexical match found! Skipping LLM calls.")
-                # You can also write an empty test log here if you want,
-                # but the main focus is on LLM-based cases.
+                print(f"   [->] Lexikális egyezés! LLM hívások kihagyva.")
+                # Ide is beírhatsz egy üres tesztnaplót, ha akarod, de a lényeg az LLM-es eseteken van
                 continue
 
-            # BERT candidate search
+            # BERT jelölt keresés
             top_candidates = get_top_candidates_combined(mention, context, CURRENT_ONTOLOGY, top_n=2)
             top_term_and_label_only_candidates = get_top_candidates_combined(mention, context, CURRENT_ONTOLOGY,combined=False, top_n=2)
 
-
-            # --- STARTING THE ABLATION TEST ---
-            # Call 1: With context and definition
+            # --- AZ ABLÁCIÓS TESZT INDÍTÁSA ---
+            # Hívás 1: Kontextussal és definícióval
             llama_with_ctx = ask_llama_nil_prediction(mention, context, top_candidates)
 
-            # Call 2: ONLY the term and domain information, WITHOUT context
+            # Hívás 2: CSAK a kifejezés és a domain információ (Kontextus NÉLKÜL)
             llama_no_ctx = ask_llama_nil_prediction_no_context(mention, top_term_and_label_only_candidates)
 
-            #llama_no_ctx = ask_llama_nil_prediction_no_context(mention, top_candidates)
-
             print(
-                f"   -> Test 1 (Ctx): {llama_with_ctx.get('decision')} | Test 2 (No-Ctx): {llama_no_ctx.get('decision')}"
-            )
+                f"   -> Teszt 1 (Ctx): {llama_with_ctx.get('decision')} | Teszt 2 (No-Ctx): {llama_no_ctx.get('decision')}")
 
-            # Save to the shared dual performance log
-            log_performance_dual_test(doc_id, mention, context, top_candidates, llama_with_ctx, llama_no_ctx)
+            # Mentés a közös duális teljesítménynaplóba
+            log_performance_dual_test(doc_id, mention, context, top_candidates,top_term_and_label_only_candidates, llama_with_ctx, llama_no_ctx)
 
-            # --- ONTOLOGY BUILDING ---
-            # Based exclusively on the decision from Test 1
+            # --- ONTOLÓGIA ÉPÍTÉSE (Kizárólag az 1-es teszt döntése alapján!) ---
             decision = llama_with_ctx.get("decision", "NEW_CONCEPT")
             if decision == "NEW_CONCEPT":
-                print(f"   [!] New concept based on context. Generating definition...")
+                print(f"   [!] Új koncepció (kontextus alapján). Definíció generálása...")
                 def_data = generate_strict_definition(mention, context)
                 generated_def = def_data.get("generated_definition", f"A specialized term representing {mention}.")
 
@@ -360,9 +381,9 @@ def run_optimized_pipeline():
 
         processed_documents.add(doc_id)
         save_progress(processed_documents)
-        print(f"=== {doc_id} done. Checkpoint saved. ===")
+        print(f"=== {doc_id} kész. Checkpoint mentve. ===")
 
-    print("\nProcess completed successfully.")
+    print("\nFolyamat sikeresen véget ért.")
 
 
 if __name__ == "__main__":

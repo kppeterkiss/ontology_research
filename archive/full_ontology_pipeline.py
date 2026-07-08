@@ -15,10 +15,10 @@ MANUAL_WHITELIST = ["worker", "work","word","yield","wound"]
 # 1. KONFIGURÁCIÓ ÉS FÁJLUTAK
 # =====================================================================
 INPUT_JSON = "filtered_paragraphs_train.json"
-ONTOLOGY_BASE_FILE = "ontology_base.json"
-EXPANDED_ONTOLOGY_BASE_FILE = "expanded_ontology_base.json"
+ONTOLOGY_BASE_FILE = "../ontology_base.json"
+EXPANDED_ONTOLOGY_BASE_FILE = "../expanded_ontology_base.json"
 
-PERFORMANCE_LOG_FILE = "results/minilm_pipeline_performance_log.jsonl"
+PERFORMANCE_LOG_FILE = "../results/minilm_pipeline_performance_log.jsonl"
 
 
 BERT_MODEL_NAME = 'all-MiniLM-L6-v2'
