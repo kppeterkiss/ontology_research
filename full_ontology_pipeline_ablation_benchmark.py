@@ -26,12 +26,12 @@ if paul:
     ONTOLOGY_BASE_FILE = "ontology_rdf_llama3_2.json"
     EXPANDED_ONTOLOGY_BASE_FILE = "p_expanded_ontology_base.json"
 
-    PERFORMANCE_LOG_FILE = "pipeline_performance_log.jsonl"
+    PERFORMANCE_LOG_FILE = "results/minilm_pipeline_performance_log.jsonl"
 else:
     SEED_ONTOLOGY_FILE = "beekeeping_corpus/glossaries/merged_glossary_terms.json"
     INPUT_JSON = "filtered_paragraphs_test.json"
     ONTOLOGY_BASE_FILE = "expanded_ontology_base.json"
-    PERFORMANCE_LOG_FILE = "pipeline_performance_log.jsonl"
+    PERFORMANCE_LOG_FILE = "results/minilm_pipeline_performance_log.jsonl"
 BERT_MODEL_NAME = 'all-MiniLM-L6-v2'
 
 # A TESZTELNI KÍVÁNT MODELLEK LISTÁJA

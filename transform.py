@@ -53,6 +53,25 @@ def rdf_to_concept_list(file_path, file_format="xml"):
             counter += 1
 
     return concepts_list
+
+def read_label_xls(label_file_path,ontology_json_path):
+    # Read all sheets into a dictionary of DataFrames
+    all_sheets = pd.read_excel(label_file_path, sheet_name=[1,2,3,4])
+
+    label_name_df=pd.read_json(ontology_json_path)
+
+    # Combine all DataFrames into a single DataFrame
+    df = pd.concat(all_sheets.values(), ignore_index=True)
+    df=df[['term','label_in_ontology_if_exist']]
+    df = pd.merge(df,label_name_df, left_on='label_in_ontology_if_exist', right_on='id', how='left')
+    df.rename(columns={"label_in_ontology_if_exist":"label"},inplace=True)
+    df.drop(columns=['id','definition','uri'],inplace=True)
+    df = df.to_dict(orient="records")
+
+    with open("labels.json", "w", encoding="utf-8") as f:
+        json.dump(df, f, indent=2, ensure_ascii=False)
+
+
 def xls_to_json(file_path):
     qwe = pd.read_excel(file_path,sheet_name=1)
 
@@ -69,8 +88,11 @@ def xls_to_json(file_path):
 # eredmény = rdf_to_concept_list("ontologia.owl", file_format="xml")
 # print(eredmény)
 if __name__ == "__main__":
+    read_label_xls("beekeeping_corpus/xls/gold standard list for precision_beekeeping_benchmark_100_terms_labels.xlsx","ontology_rdf.json")
+    '''
     xls_to_json("beekeeping_corpus/xls/gold_standard_multi_word_noun_phrase_contexts 1.xlsx")
     xls_to_json("beekeeping_corpus/xls/gold_standard_single_noun_contexts 1.xlsx")
     res = rdf_to_concept_list("beekeeping_corpus/rdf/v2PBO.rdf", file_format="xml")
     with open("ontology_rdf.json", "w", encoding="utf-8") as f:
         json.dump(res, f, indent=2, ensure_ascii=False)
+    '''

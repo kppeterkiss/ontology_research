@@ -1,0 +1,106 @@
+/Users/kisspeter/.local/bin/uv run /Users/kisspeter/PycharmProjects/ontology_research/.venv/bin/python /Users/kisspeter/PycharmProjects/ontology_research/evaluate_benchmark.py
+
+======================================================================
+   FINAL PERFORMANCE REPORT: STRICT CONCEPT ALIGNMENT (WITH AND WITHOUT CONTEXT)
+======================================================================
+
+======================================================================
+   LEXICAL MATCH(32): sensor; ambient temperature; humidity sensor; weight sensor; apiary; frame; humidity; temperature; weight; apis mellifera; bee brush; forager bee; antenna; bee colony; battery; bee; bee hive; bee smoker; comb foundation; hive stand; abdomen; thorax; hive entrance; brood chamber; gas sensor; honey super; internal temperature; monitoring system; pollen trap; temperature sensor; apis; observation) :
+======================================================================
+
+>>> MODELL: LLAMA3.2 (68 valid tasks) <<<
+
+   [RUN 1: WITH CONTEXT + DEFINITION]
+   Matrix: Clean_TP=4, TN=50, FP=0, FN=14, Misclass=0
+   - Accuracy   : 79.41%
+   - Precision  : 100.00% (Including misclassification!)
+   - Recall   : 22.22%
+   - F1-Score  : 36.36%
+
+......................................................................
+   - Misclass :
+   - FP:
+   - FN: 'environmental temperature': expected_id: AmbientTemperature->None; 'external temperature': expected_id: AmbientTemperature->None; 'beehive state': expected_id: BeeHiveStatus->None; 'worker': expected_id: WorkerBeeRole->None; 'larva': expected_id: LarvaStage_->None; 'beehive': expected_id: BeeHive->None; 'weight reading': expected_id: WeightObservation->None; 'pupa': expected_id: PupaStage_->None; 'beehive entrance': expected_id: HiveEntrance->None; 'weight recording': expected_id: WeightObservation->None; 'loadcell': expected_id: WeightSensor->None; 'gps': expected_id: GPSTracker->None; 'logger': expected_id: DataLogger->None; 'measurement': expected_id: Observation->None
+   - TN: acoustic amplitude; audio spectrogram image; acoustic analysis; acoustic and vibration signal; queen pheromone; ambient sound; apiary inspection; ambient vibration; analog audio signal; bee sound signal; beehive analysis; hive analysis; hive health assessment; flight; foraging; frequency; iot; nectar; apiary wide hive sensor network; amplitude; audio signal; battery voltage; bee behavior analysis; inspection; proboscis; bee colony thermoregulation activity; bee flight activity; bee flight path; microcontroller; grafting; hemolymph; pesticide; pheromone; sacbrood; brood pheromone; iot hive monitoring device; image; manual colony inspection; manual hive inspection; varroa infestation; amitraz; hormone; voltage; calibration; video; rainfall; thermoregulation; noise; spectrogram; thymol
+   - TP: 'colony'->BeeColony_; 'alarm'->Alert; 'arduino'->ArduinoBoard; 'entrance'->HiveEntrance
+
+   [RUN 2: WITHOUT CONTEXT + DEFINITION]
+   Matrix: Clean_TP=6, TN=50, FP=0, FN=12, Misclass=0
+   - Accuracy : 82.35%
+   - Precision: 100.00%
+   - Recall   : 33.33%
+   - F1-Score : 50.00%
+
+......................................................................
+   - Misclass :
+   - FP:
+   - FN: 'external temperature': expected_id: AmbientTemperature->None; 'beehive state': expected_id: BeeHiveStatus->None; 'alarm': expected_id: Alert->None; 'larva': expected_id: LarvaStage_->None; 'beehive': expected_id: BeeHive->None; 'weight reading': expected_id: WeightObservation->None; 'weight recording': expected_id: WeightObservation->None; 'arduino': expected_id: ArduinoBoard->None; 'loadcell': expected_id: WeightSensor->None; 'gps': expected_id: GPSTracker->None; 'logger': expected_id: DataLogger->None; 'measurement': expected_id: Observation->None
+   - TN: acoustic amplitude; audio spectrogram image; acoustic analysis; acoustic and vibration signal; queen pheromone; ambient sound; apiary inspection; ambient vibration; analog audio signal; bee sound signal; beehive analysis; hive analysis; hive health assessment; flight; foraging; frequency; iot; nectar; apiary wide hive sensor network; amplitude; audio signal; battery voltage; bee behavior analysis; inspection; proboscis; bee colony thermoregulation activity; bee flight activity; bee flight path; microcontroller; grafting; hemolymph; pesticide; pheromone; sacbrood; brood pheromone; iot hive monitoring device; image; manual colony inspection; manual hive inspection; varroa infestation; amitraz; hormone; voltage; calibration; video; rainfall; thermoregulation; noise; spectrogram; thymol
+   - TP: 'environmental temperature'->AmbientTemperature; 'colony'->BeeColony_; 'worker'->WorkerBeeRole; 'pupa'->PupaStage_; 'beehive entrance'->HiveEntrance; 'entrance'->HiveEntrance
+
+----------------------------------------------------------------------
+
+>>> MODELL: MISTRAL (68 valid tasks) <<<
+
+   [RUN 1: WITH CONTEXT + DEFINITION]
+   Matrix: Clean_TP=18, TN=27, FP=23, FN=0, Misclass=0
+   - Accuracy   : 66.18%
+   - Precision  : 43.90% (Including misclassification!)
+   - Recall   : 100.00%
+   - F1-Score  : 61.02%
+
+......................................................................
+   - Misclass :
+   - FP: 'acoustic amplitude': expected_id: NONE->SoundVibrationSensor; 'acoustic analysis': expected_id: NONE->AcousticPatternObservation; 'acoustic and vibration signal': expected_id: NONE->SoundVibrationSensor; 'ambient sound': expected_id: NONE->SoundVibrationSensor; 'ambient vibration': expected_id: NONE->SoundVibrationSensor; 'analog audio signal': expected_id: NONE->SoundVibrationSensor; 'beehive analysis': expected_id: NONE->ObservationalBeeHive; 'hive analysis': expected_id: NONE->BeeHiveStatus; 'hive health assessment': expected_id: NONE->ObservationalBeeHive; 'foraging': expected_id: NONE->ForagerBee; 'frequency': expected_id: NONE->AcousticPatternObservation; 'iot': expected_id: NONE->TelemetrySystem; 'nectar': expected_id: NONE->ForagerBee; 'audio signal': expected_id: NONE->SoundVibrationSensor; 'battery voltage': expected_id: NONE->Battery; 'inspection': expected_id: NONE->MonitoringProcess; 'microcontroller': expected_id: NONE->ArduinoBoard; 'pesticide': expected_id: NONE->PestDetectorSensor; 'iot hive monitoring device': expected_id: NONE->BeeHive; 'manual colony inspection': expected_id: NONE->MonitoringProcess; 'manual hive inspection': expected_id: NONE->Observational Bee Hive; 'hormone': expected_id: NONE->Organism; 'noise': expected_id: NONE->AcousticPattern
+   - FN:
+   - TN: audio spectrogram image; queen pheromone; apiary inspection; bee sound signal; flight; apiary wide hive sensor network; amplitude; bee behavior analysis; proboscis; bee colony thermoregulation activity; bee flight activity; bee flight path; grafting; hemolymph; pheromone; sacbrood; brood pheromone; image; varroa infestation; amitraz; voltage; calibration; video; rainfall; thermoregulation; spectrogram; thymol
+   - TP: 'environmental temperature'->AmbientTemperature; 'external temperature'->AmbientTemperature; 'beehive state'->BeeHiveStatus; 'colony'->BeeColony_; 'worker'->WorkerBeeRole; 'alarm'->Alert; 'larva'->LarvaStage_; 'beehive'->BeeHive; 'weight reading'->WeightObservation; 'pupa'->PupaStage_; 'beehive entrance'->HiveEntrance; 'weight recording'->WeightObservation; 'arduino'->ArduinoBoard; 'loadcell'->WeightSensor; 'entrance'->HiveEntrance; 'gps'->GPSTracker; 'logger'->DataLogger; 'measurement'->Observation
+
+   [RUN 2: WITHOUT CONTEXT + DEFINITION]
+   Matrix: Clean_TP=17, TN=44, FP=6, FN=1, Misclass=0
+   - Accuracy : 89.71%
+   - Precision: 73.91%
+   - Recall   : 94.44%
+   - F1-Score : 82.93%
+
+......................................................................
+   - Misclass :
+   - FP: 'acoustic analysis': expected_id: NONE->AcousticPatternObservation; 'acoustic and vibration signal': expected_id: NONE->SoundVibrationSensor; 'ambient sound': expected_id: NONE->AcousticPatternObservation; 'hive health assessment': expected_id: NONE->BeesHiveStatus; 'inspection': expected_id: NONE->MonitoringProcess; 'microcontroller': expected_id: NONE->ArduinoBoard
+   - FN: 'loadcell': expected_id: WeightSensor->None
+   - TN: acoustic amplitude; audio spectrogram image; queen pheromone; apiary inspection; ambient vibration; analog audio signal; bee sound signal; beehive analysis; hive analysis; flight; foraging; frequency; iot; nectar; apiary wide hive sensor network; amplitude; audio signal; battery voltage; bee behavior analysis; proboscis; bee colony thermoregulation activity; bee flight activity; bee flight path; grafting; hemolymph; pesticide; pheromone; sacbrood; brood pheromone; iot hive monitoring device; image; manual colony inspection; manual hive inspection; varroa infestation; amitraz; hormone; voltage; calibration; video; rainfall; thermoregulation; noise; spectrogram; thymol
+   - TP: 'environmental temperature'->AmbientTemperature; 'external temperature'->AmbientTemperature; 'beehive state'->BeeHiveStatus; 'colony'->BeeColony_; 'worker'->WorkerBeeRole; 'alarm'->Alert; 'larva'->LarvaStage_; 'beehive'->BeeHive; 'weight reading'->WeightObservation; 'pupa'->PupaStage_; 'beehive entrance'->HiveEntrance; 'weight recording'->WeightObservation; 'arduino'->ArduinoBoard; 'entrance'->HiveEntrance; 'gps'->GPSTracker; 'logger'->DataLogger; 'measurement'->Observation
+
+----------------------------------------------------------------------
+
+>>> MODELL: LLAMA3.1 (68 valid tasks) <<<
+
+   [RUN 1: WITH CONTEXT + DEFINITION]
+   Matrix: Clean_TP=15, TN=47, FP=3, FN=3, Misclass=0
+   - Accuracy   : 91.18%
+   - Precision  : 83.33% (Including misclassification!)
+   - Recall   : 83.33%
+   - F1-Score  : 83.33%
+
+......................................................................
+   - Misclass :
+   - FP: 'battery voltage': expected_id: NONE->Battery; 'inspection': expected_id: NONE->MonitoringProcess; 'microcontroller': expected_id: NONE->ArduinoBoard
+   - FN: 'loadcell': expected_id: WeightSensor->None; 'gps': expected_id: GPSTracker->None; 'measurement': expected_id: Observation->None
+   - TN: acoustic amplitude; audio spectrogram image; acoustic analysis; acoustic and vibration signal; queen pheromone; ambient sound; apiary inspection; ambient vibration; analog audio signal; bee sound signal; beehive analysis; hive analysis; hive health assessment; flight; foraging; frequency; iot; nectar; apiary wide hive sensor network; amplitude; audio signal; bee behavior analysis; proboscis; bee colony thermoregulation activity; bee flight activity; bee flight path; grafting; hemolymph; pesticide; pheromone; sacbrood; brood pheromone; iot hive monitoring device; image; manual colony inspection; manual hive inspection; varroa infestation; amitraz; hormone; voltage; calibration; video; rainfall; thermoregulation; noise; spectrogram; thymol
+   - TP: 'environmental temperature'->AmbientTemperature; 'external temperature'->AmbientTemperature; 'beehive state'->BeeHiveStatus; 'colony'->BeeColony_; 'worker'->WorkerBeeRole; 'alarm'->Alert; 'larva'->LarvaStage_; 'beehive'->BeeHive; 'weight reading'->WeightObservation; 'pupa'->PupaStage_; 'beehive entrance'->HiveEntrance; 'weight recording'->WeightObservation; 'arduino'->ArduinoBoard; 'entrance'->HiveEntrance; 'logger'->DataLogger
+
+   [RUN 2: WITHOUT CONTEXT + DEFINITION]
+   Matrix: Clean_TP=13, TN=49, FP=1, FN=4, Misclass=1
+   - Accuracy : 91.18%
+   - Precision: 86.67%
+   - Recall   : 72.22%
+   - F1-Score : 78.79%
+
+......................................................................
+   - Misclass : 'beehive': expected_id: BeeHive->Bee_[ID: BeeHive]
+   - FP: 'microcontroller': expected_id: NONE->ArduinoBoard
+   - FN: 'beehive state': expected_id: BeeHiveStatus->None; 'weight recording': expected_id: WeightObservation->None; 'loadcell': expected_id: WeightSensor->None; 'measurement': expected_id: Observation->None
+   - TN: acoustic amplitude; audio spectrogram image; acoustic analysis; acoustic and vibration signal; queen pheromone; ambient sound; apiary inspection; ambient vibration; analog audio signal; bee sound signal; beehive analysis; hive analysis; hive health assessment; flight; foraging; frequency; iot; nectar; apiary wide hive sensor network; amplitude; audio signal; battery voltage; bee behavior analysis; inspection; proboscis; bee colony thermoregulation activity; bee flight activity; bee flight path; grafting; hemolymph; pesticide; pheromone; sacbrood; brood pheromone; iot hive monitoring device; image; manual colony inspection; manual hive inspection; varroa infestation; amitraz; hormone; voltage; calibration; video; rainfall; thermoregulation; noise; spectrogram; thymol
+   - TP: 'environmental temperature'->AmbientTemperature; 'external temperature'->AmbientTemperature; 'colony'->BeeColony_; 'worker'->WorkerBeeRole; 'alarm'->Alert; 'larva'->LarvaStage_; 'weight reading'->WeightObservation; 'pupa'->PupaStage_; 'beehive entrance'->HiveEntrance; 'arduino'->ArduinoBoard; 'entrance'->HiveEntrance; 'gps'->GPSTracker; 'logger'->DataLogger
+
+----------------------------------------------------------------------
+

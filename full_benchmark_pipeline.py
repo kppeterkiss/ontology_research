@@ -14,7 +14,7 @@ PROGRESS_FILE = "pipeline_progress.json"
 append_to_ontology = False
 paul = True
 INPUS_JSON = "filtered_paragraphs_test.json"
-# Paul con fig:
+# Paul config:
 if paul:
     SEED_ONTOLOGY_FILE = "ontology_rdf.json"
 
@@ -23,12 +23,12 @@ if paul:
     ONTOLOGY_BASE_FILE = "ontology_rdf_llama3_2.json"
     EXPANDED_ONTOLOGY_BASE_FILE = "p_expanded_ontology_base.json"
 
-    PERFORMANCE_LOG_FILE = "pipeline_performance_log.jsonl"
+    PERFORMANCE_LOG_FILE = "results/minilm_pipeline_performance_log_llm_performance.jsonl"
 else:
     SEED_ONTOLOGY_FILE = "beekeeping_corpus/glossaries/merged_glossary_terms.json"
     INPUT_JSON = "filtered_paragraphs_test.json"
     ONTOLOGY_BASE_FILE = "expanded_ontology_base.json"
-    PERFORMANCE_LOG_FILE = "pipeline_performance_log.jsonl"
+    PERFORMANCE_LOG_FILE = "results/minilm_pipeline_performance_log.jsonl"
 BERT_MODEL_NAME = 'all-MiniLM-L6-v2'
 
 # Az Ollama LLM modellek a benchmark teszthez
@@ -36,6 +36,7 @@ TEST_MODELS = ["llama3.2", "mistral", "llama3.1"]
 # PARAMÉTEREZHETŐ MODELLEK
 # Itt adhatod meg, melyik HuggingFace BERT modellt akarod használni (pl. SciBERT, BioBERT)
 EMBEDDING_MODEL_PARAM = "allenai/scibert_scivocab_uncased"
+EMBEDDING_MODEL_PARAM = "sentence-transformers/all-MiniLM-L6-v2"
 
 
 
@@ -334,8 +335,63 @@ def generate_strict_definition(mention, context):
         return {"generated_definition": f"A specialized precision beekeeping term representing {mention}."}
 
 
+def log_benchmark_result_with_metrics(source_doc, mention, context, bert_candidates, model_outputs, oov_info,
+                                      embedding_model_used):
+    """
+    KITERJESZTETT NAPLÓZÓ: A döntések mellett elmenti az Ollama által
+    mért tűpontos token- és idő-fogyasztási statisztikákat is!
+    """
+    # Kivonjuk a fogyasztási statisztikákat a modellek válaszaiból
+    consumption_metrics = {}
+    for model_name, results in model_outputs.items():
+        consumption_metrics[model_name] = {
+            "with_context": {
+                # Nanoszekundumból másodpercre váltunk (/ 1,000,000,000)
+                "total_time_sec": round(results["with_context"].get("total_duration", 0) / 1e9, 3),
+                "prompt_tokens": results["with_context"].get("prompt_eval_count", 0),
+                "generated_tokens": results["with_context"].get("eval_count", 0),
+                "tokens_per_second": round(
+                    results["with_context"].get("eval_count", 0) /
+                    (results["with_context"].get("eval_duration", 1) / 1e9), 1
+                ) if results["with_context"].get("eval_duration", 0) > 0 else 0
+            },
+            "without_context": {
+                "total_time_sec": round(results["without_context"].get("total_duration", 0) / 1e9, 3),
+                "prompt_tokens": results["without_context"].get("prompt_eval_count", 0),
+                "generated_tokens": results["without_context"].get("eval_count", 0),
+                "tokens_per_second": round(
+                    results["without_context"].get("eval_count", 0) /
+                    (results["without_context"].get("eval_duration", 1) / 1e9), 1
+                ) if results["without_context"].get("eval_duration", 0) > 0 else 0
+            }
+        }
+
+    log_entry = {
+        "doc": source_doc,
+        "mention": mention,
+        "context": context,
+        "embedding_model_used": embedding_model_used,
+        "oov_diagnostic": oov_info,
+        "bert_top_suggestions": [{"id": c["concept"]["id"], "name": c["concept"]["name"], "score": round(c["score"], 4)}
+                                 for c in bert_candidates],
+        # Elmentjük a tiszta JSON döntéseket
+        "benchmark_results": {
+            m: {
+                "with_context": {"decision": model_outputs[m]["with_context"].get("decision")},
+                "without_context": {"decision": model_outputs[m]["without_context"].get("decision")}
+            } for m in model_outputs
+        },
+        # ÉS MELLÉ TESSZÜK A FOGYASZTÁSI MÁTRIXOT
+        "consumption_metrics": consumption_metrics
+    }
+
+    with open(PERFORMANCE_LOG_FILE, "a", encoding="utf-8") as f:
+        f.write(json.dumps(log_entry, ensure_ascii=False) + "\n")
+
+
 def log_benchmark_dual_test(source_doc, mention, context, bert_candidates, model_outputs, oov_info,
                             embedding_model_used):
+
     log_entry = {
         "doc": source_doc,
         "mention": mention,
@@ -406,9 +462,10 @@ def run_benchmark_pipeline(embedding_model_param):
         # Lexikális Kapuőr
         lexical_match = check_lexical_exact_match(mention, CURRENT_ONTOLOGY)
         if lexical_match:
+            res={"decision": "LEXICAL_MATCH", "matched_concept_id": lexical_match['id'], "reasoning": "LEXICAL MATCH, no LLM called"}
             print(f" [->] Lexikális egyezés megtalálva! ID: {lexical_match['id']}. LLM-ek átugorva.")
-            log_benchmark_dual_test(doc_id, mention, context, "", "",
-                                 {m: {"with_context": "LEXICAL", "without_context": "LEXICAL"} for m in TEST_MODELS},"NONE")
+            log_benchmark_result_with_metrics(doc_id, mention, context, "",
+                                 {m: {"with_context": res, "without_context": res} for m in TEST_MODELS},"NONE","NONE")
 
             continue
 
@@ -428,8 +485,10 @@ def run_benchmark_pipeline(embedding_model_param):
             }
             print(f" [{model_name}] Ctx: {res_with_ctx.get('decision')} | No-Ctx: {res_no_ctx.get('decision')}")
             # Duális naplózás az OOV információkkal együtt!
-        log_benchmark_dual_test(doc_id, mention, context, top_candidates, model_outputs, oov_log[mention],
+        log_benchmark_result_with_metrics(doc_id, mention, context, top_candidates, model_outputs, oov_log[mention],
                              embedding_model_param)
+        #log_benchmark_dual_test(doc_id, mention, context, top_candidates, model_outputs, oov_log[mention],
+        #                     embedding_model_param)
         # Ontológia növelése (Llama 3.1 8B kontextusos döntése alapján)
         main_decision = model_outputs["llama3.1"]["with_context"].get("decision", "NEW_CONCEPT")
         if append_to_ontology and main_decision == "NEW_CONCEPT":

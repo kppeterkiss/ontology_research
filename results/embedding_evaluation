@@ -1,0 +1,273 @@
+
+=================================================================
+     BERT EMBEDDING EVALUATION REPORT (Recall@5 / Threshold=0.65)
+=================================================================
+Global recall success of models (without NIL cases ):
+
+ - General BERT (MiniLM)    : 88.00%
+ - SciBERT (AllenAI)        : 47.00%
+ - BiomedBERT (Microsoft)   : 43.00%
+
+-----------------------------------------------------------------
+   RESEARCH BLINDSPOT: WORDS ON WHICH ALL  3 MODELS FAILED
+-----------------------------------------------------------------
+   All errors:
+alarm -> []
+apiary -> []
+arduino -> []
+battery -> []
+beehive -> []
+entrance -> [('BiomedBERT (Microsoft)', 'HiveEntrance', ['Boots', 'Alert', 'Antenna', 'Entity', 'Battery'], 0.9896259903907776)]
+frame -> []
+gps -> [('SciBERT (AllenAI)', 'GPSTracker', ['Bee', 'Disconnected', 'Thorax', 'Normal', 'Virgin Bee'], 0.8734041452407837), ('BiomedBERT (Microsoft)', 'GPSTracker', ['Sensor', 'Antenna', 'Person', 'Alert', 'Organization'], 0.9677640795707703)]
+humidity -> []
+loadcell -> [('SciBERT (AllenAI)', 'WeightSensor', ['Gpstracker', 'Network Router', 'Power Contoller', 'Rfidreader', 'Honey Filter'], 0.850831151008606)]
+logger -> []
+measurement -> []
+observation -> []
+sensor -> []
+temperature -> []
+weight -> []
+abdomen -> []
+antenna -> []
+apis -> []
+bee -> []
+colony -> [('SciBERT (AllenAI)', 'BeeColony_', ['Region', 'Event', 'Bee', 'Frame', 'Sensor'], 0.8691726326942444), ('BiomedBERT (Microsoft)', 'BeeColony_', ['Frame', 'Person', 'Antenna', 'Disturbed', 'Bee'], 0.9739739894866943)]
+larva -> [('BiomedBERT (Microsoft)', 'LarvaStage_', ['Antenna', 'Thorax', 'Frame', 'Person', 'Disturbed'], 0.9847061634063721)]
+pupa -> []
+thorax -> []
+worker -> [('BiomedBERT (Microsoft)', 'WorkerBeeRole', ['Disturbed', 'Person', 'Boots', 'Antenna', 'Battery'], 0.987345814704895)]
+ambient temperature -> []
+bee hive -> []
+beehive entrance -> [('BiomedBERT (Microsoft)', 'HiveEntrance', ['Hive Bee', 'Bee Hive Part', 'Drone Bee Role', 'Bee Role', 'Propolis Trap'], 0.9830547571182251)]
+beehive state -> [('BiomedBERT (Microsoft)', 'BeeHiveStatus', ['Hive Bee', 'Beekeeping Utensil', 'Bee Hive Part', 'Langstroth Bee Hive', 'Bee Hive'], 0.9749539494514465)]
+brood chamber -> []
+environmental temperature -> []
+external temperature -> []
+gas sensor -> []
+hive entrance -> []
+humidity sensor -> []
+internal temperature -> []
+monitoring system -> []
+weight reading -> []
+weight recording -> []
+weight sensor -> []
+apis mellifera -> []
+bee colony -> []
+bee brush -> []
+bee smoker -> []
+comb foundation -> []
+forager bee -> []
+hive stand -> []
+honey super -> []
+pollen trap -> []
+temperature sensor -> []
+calibration -> [('SciBERT (AllenAI)', 'no', ['Humidity', 'Acceleration', 'Observation', 'Connected', 'Region'], 0.8540175557136536), ('BiomedBERT (Microsoft)', 'no', ['Disturbed', 'Alert', 'Organization', 'Boots', 'Antenna'], 0.9867942929267883)]
+flight -> [('SciBERT (AllenAI)', 'no', ['Connected', 'Acceleration', 'Observation', 'Disconnected', 'Humidity'], 0.8638115525245667), ('BiomedBERT (Microsoft)', 'no', ['Disturbed', 'Antenna', 'Alert', 'Boots', 'Battery'], 0.9875453114509583)]
+foraging -> [('SciBERT (AllenAI)', 'no', ['Forager Bee', 'Field Bee', 'Mated Bee', 'Bee Brush', 'Guard Bee'], 0.8845056891441345), ('BiomedBERT (Microsoft)', 'no', ['Antenna', 'Battery', 'Sensor', 'Disturbed', 'Acceleration'], 0.9848730564117432)]
+image -> [('SciBERT (AllenAI)', 'no', ['Event', 'Frame', 'Weak Signal', 'Sensor', 'Region'], 0.8772870302200317), ('BiomedBERT (Microsoft)', 'no', ['Frame', 'Person', 'Battery', 'Sensor', 'Antenna'], 0.9726014733314514)]
+inspection -> [('SciBERT (AllenAI)', 'no', ['Observation', 'Boots', 'Monitoring Prerequisite', 'Acceleration', 'Organization'], 0.8387290239334106), ('BiomedBERT (Microsoft)', 'no', ['Frame', 'Organization', 'Disturbed', 'Person', 'Antenna'], 0.985079288482666)]
+iot -> [('SciBERT (AllenAI)', 'no', ['Disconnected', 'Bee', 'Connected', 'Ready', 'Sensor'], 0.8871868848800659), ('BiomedBERT (Microsoft)', 'no', ['Boots', 'Antenna', 'Disturbed', 'Alert', 'Battery'], 0.993846595287323)]
+microcontroller -> [('SciBERT (AllenAI)', 'no', ['Sensor', 'Temperature Sensor', 'Agent', 'Humidity Sensor', 'Rfidreader'], 0.8757739067077637), ('BiomedBERT (Microsoft)', 'no', ['Actuator', 'Power Supply System', 'Heater Controller', 'Network Router', 'Acoustic Emitter'], 0.9553771615028381)]
+noise -> [('SciBERT (AllenAI)', 'no', ['Weak Signal', 'Disconnected', 'Acceleration', 'Humidity', 'Connected'], 0.8599680662155151), ('BiomedBERT (Microsoft)', 'no', ['Antenna', 'Frame', 'Disturbed', 'Person', 'Normal'], 0.9804601073265076)]
+spectrogram -> [('SciBERT (AllenAI)', 'no', ['Honey Filter', 'Antenna', 'Top Bar Bee Hive', 'Weak Signal', 'Rfidreader'], 0.846993625164032), ('BiomedBERT (Microsoft)', 'no', ['Acoustic Pattern', 'Acoustic Pattern Observation', 'Temperature Sensor', 'Acoustic Emitter', 'Telemetry System'], 0.9680805206298828)]
+thermoregulation -> [('SciBERT (AllenAI)', 'no', ['Internal Temperature Observation', 'Brood Chamber', 'Temperature Observation', 'Internal Temperature', 'Bee Brush'], 0.7492834329605103), ('BiomedBERT (Microsoft)', 'no', ['Ambient Temperature', 'Temperature Sensor', 'Telemetry System', 'Growth Stage', 'Internal Temperature'], 0.9664850234985352)]
+video -> [('SciBERT (AllenAI)', 'no', ['Observation', 'Event', 'Region', 'Device Part', 'Organism'], 0.8244467377662659), ('BiomedBERT (Microsoft)', 'no', ['Frame', 'Process', 'Observation', 'Event', 'Battery'], 0.9705938696861267)]
+voltage -> [('SciBERT (AllenAI)', 'no', ['Temperature', 'Antenna', 'Power Low', 'Acceleration', 'Sensor'], 0.8441111445426941), ('BiomedBERT (Microsoft)', 'no', ['Device', 'Antenna', 'Battery', 'Disturbed', 'Sensor'], 0.9871099591255188)]
+amitraz -> [('SciBERT (AllenAI)', 'no', ['Varroa Drop', 'Frames Hive', 'Torch', 'Varroa Drop Observation', 'Disturbed'], 0.7709738612174988), ('BiomedBERT (Microsoft)', 'no', ['Torch', 'Dadant Hive', 'Hive Stand', 'Frames Hive', 'Apis'], 0.9598475098609924)]
+amplitude -> [('SciBERT (AllenAI)', 'no', ['Region', 'Sensor', 'Temperature', 'Weight', 'Normal'], 0.8581873774528503), ('BiomedBERT (Microsoft)', 'no', ['Battery', 'Antenna', 'Device', 'Frame', 'Normal'], 0.9792473316192627)]
+frequency -> [('SciBERT (AllenAI)', 'no', ['Temperature', 'Sensor', 'Acceleration', 'Event', 'Region'], 0.8678738474845886), ('BiomedBERT (Microsoft)', 'no', ['Disturbed', 'Boots', 'Battery', 'Alert', 'Entity'], 0.9880804419517517)]
+grafting -> [('SciBERT (AllenAI)', 'no', ['Humidity', 'Boots', 'Connected', 'Region', 'Bee Brush'], 0.8370158672332764), ('BiomedBERT (Microsoft)', 'no', ['Acceleration', 'Antenna', 'Base', 'Normal', 'Sensor'], 0.9681354761123657)]
+hemolymph -> [('SciBERT (AllenAI)', 'no', ['Egg Stage', 'Pollen Trap', 'Pupa Stage', 'Adult Stage', 'Scout Bee'], 0.8118219971656799), ('BiomedBERT (Microsoft)', 'no', ['Bee Colony', 'Torch', 'Bee Brush', 'Honey Extractor', 'Weight'], 0.9480689167976379)]
+hormone -> [('SciBERT (AllenAI)', 'no', ['Organism', 'Bee', 'Region', 'Event', 'Humidity'], 0.8250123262405396), ('BiomedBERT (Microsoft)', 'no', ['Agent', 'Antenna', 'Battery', 'Sensor', 'Device'], 0.9835570454597473)]
+nectar -> [('SciBERT (AllenAI)', 'no', ['Scout Bee', 'Guard Bee', 'Bee Brush', 'Honey Filter', 'Pollen Trap'], 0.806511640548706), ('BiomedBERT (Microsoft)', 'no', ['Bee Brush', 'Bee Colony', 'Bee Hive', 'Flow Bee Hive', 'Pollen Trap'], 0.9621486067771912)]
+pesticide -> [('SciBERT (AllenAI)', 'no', ['Bee', 'Forager Bee', 'Field Bee', 'Normal', 'Connected'], 0.8636687397956848), ('BiomedBERT (Microsoft)', 'no', ['Agent', 'Device', 'Sensor', 'Antenna', 'Observation'], 0.9725117087364197)]
+pheromone -> [('SciBERT (AllenAI)', 'no', ['Bee', 'Forager Bee', 'Sensor', 'Virgin Bee', 'Field Bee'], 0.8930217027664185), ('BiomedBERT (Microsoft)', 'no', ['Antenna', 'Sensor', 'Person', 'Acceleration', 'Disturbed'], 0.9821722507476807)]
+proboscis -> [('SciBERT (AllenAI)', 'no', ['Apis Laboriosa', 'Apiary', 'Varroa Drop', 'Frames Hive', 'Scout Bee'], 0.8025907278060913), ('BiomedBERT (Microsoft)', 'no', ['Pupa Stage', 'Adult Stage', 'Larva Stage', 'Queenless', 'Egg Stage'], 0.9435827136039734)]
+rainfall -> [('SciBERT (AllenAI)', 'no', ['Humidity', 'Virgin Bee', 'Temperature', 'Field Bee', 'Forager Bee'], 0.8530093431472778), ('BiomedBERT (Microsoft)', 'no', ['Disturbed', 'Antenna', 'Boots', 'Frame', 'Battery'], 0.9790099263191223)]
+sacbrood -> [('SciBERT (AllenAI)', 'no', ['Varroa Drop', 'Frames Hive', 'Comb Foundation', 'Esp32Board', 'Bee Brush'], 0.7893399000167847), ('BiomedBERT (Microsoft)', 'no', ['Torch', 'Hive Bee', 'Scout Bee', 'Guard Bee', 'Langstroth Bee Hive'], 0.9729495048522949)]
+thymol -> [('SciBERT (AllenAI)', 'no', ['Honey Filter', 'Observational Bee Hive', 'Frames Hive', 'Varroa Drop', 'Humidity'], 0.7743654251098633), ('BiomedBERT (Microsoft)', 'no', ['Honey Extractor', 'Torch', 'Bee Hive', 'Bee Veil', 'Bee'], 0.9618760943412781)]
+ambient sound -> [('SciBERT (AllenAI)', 'no', ['Acoustic Emitter', 'Sound Vibration Sensor', 'Social Agent', 'Ventilation Controller', 'Bee Brush'], 0.8040329217910767), ('BiomedBERT (Microsoft)', 'no', ['Acoustic Pattern', 'Sound Vibration Sensor', 'Brood Chamber', 'Humidity Sensor', 'Acoustic Pattern Observation'], 0.9629701972007751)]
+ambient vibration -> [('General BERT (MiniLM)', 'no', ['Sound Vibration Sensor', 'Ambient Temperature', 'Ambient Temperature Observation', 'Weight Sensor', 'Sensor'], 0.6634962558746338), ('SciBERT (AllenAI)', 'no', ['Sound Vibration Sensor', 'Protective Gear', 'Acceleration', 'Acoustic Emitter', 'Ventilation Controller'], 0.8577193021774292), ('BiomedBERT (Microsoft)', 'no', ['Ambient Temperature', 'Sound Vibration Sensor', 'Temperature Sensor', 'Ambient Temperature Observation', 'Humidity Sensor'], 0.9581817388534546)]
+1. Expression: 'ambient vibration'
+   - Expected state: 'no'
+   - Reason of error: Too high score at the modell (for example. 0.6635) for an unrelated concept.
+
+analog audio signal -> [('SciBERT (AllenAI)', 'no', ['Sound Vibration Sensor', 'Weak Signal', 'Ventilation Controller', 'Sensor Okay', 'Telemetry System'], 0.816468358039856), ('BiomedBERT (Microsoft)', 'no', ['Acoustic Pattern', 'Sound Vibration Sensor', 'Acoustic Emitter', 'Acoustic Pattern Observation', 'Data Logger'], 0.9649704694747925)]
+apiary inspection -> [('General BERT (MiniLM)', 'no', ['Apiary', 'Apis', 'Apis Laboriosa', 'Apis Mellifera Unicolor', 'Apis Andremiformis'], 0.6610322594642639), ('SciBERT (AllenAI)', 'no', ['Apiary', 'Varroa Drop Observation', 'Swarm Preparation', 'Temperature Observation', 'Monitoring Prerequisite'], 0.8332072496414185), ('BiomedBERT (Microsoft)', 'no', ['Apiary', 'Field Bee', 'Apis', 'Bee Role', 'Guard Bee'], 0.9842846393585205)]
+2. Expression: 'apiary inspection'
+   - Expected state: 'no'
+   - Reason of error: Too high score at the modell (for example. 0.6610) for an unrelated concept.
+
+apiary wide hive sensor network -> [('SciBERT (AllenAI)', 'no', ['Observational Bee Hive', 'Rfidreader', 'Sensor Network Status', 'Sensor Failure Alert', 'Apiary'], 0.8147714734077454), ('BiomedBERT (Microsoft)', 'no', ['Network Router', 'Sensor Network Status', 'Flow Bee Hive', 'Bee Hive Status', 'Beekeeper Role'], 0.9707933068275452)]
+beehive analysis -> [('General BERT (MiniLM)', 'no', ['Bee', 'Observational Bee Hive', 'Bee Hive Status', 'Mated Bee', 'Forager Bee'], 0.6590840816497803), ('SciBERT (AllenAI)', 'no', ['Bee Hive Status', 'Hive Bee', 'Bee Hive Part', 'Varroa Drop Observation', 'Pollen Trap'], 0.8345540165901184), ('BiomedBERT (Microsoft)', 'no', ['Bee Hive Part', 'Hive Bee', 'Beekeeper Role', 'Beekeeping Utensil', 'Propolis Trap'], 0.9740193486213684)]
+3. Expression: 'beehive analysis'
+   - Expected state: 'no'
+   - Reason of error: Too high score at the modell (for example. 0.6591) for an unrelated concept.
+
+hive analysis -> [('General BERT (MiniLM)', 'no', ['Hive Bee', 'Hive Stand', 'Bee Hive', 'Bee Hive Status', 'Frames Hive'], 0.6539251208305359), ('SciBERT (AllenAI)', 'no', ['Hive Entrance', 'Bee Hive Part', 'Hive Bee', 'Frames Hive', 'Flow Bee Hive'], 0.8727277517318726), ('BiomedBERT (Microsoft)', 'no', ['Hive Stand', 'Hive Entrance', 'Frames Hive', 'Organization', 'Comb Foundation'], 0.9815434813499451)]
+4. Expression: 'hive analysis'
+   - Expected state: 'no'
+   - Reason of error: Too high score at the modell (for example. 0.6539) for an unrelated concept.
+
+iot hive monitoring device -> [('SciBERT (AllenAI)', 'no', ['Gateway Device', 'Movement Traffic Sensor', 'Rfidreader', 'Monitoring System', 'Humidity Sensor'], 0.8614093065261841), ('BiomedBERT (Microsoft)', 'no', ['Temperature Sensor', 'Humidity Sensor', 'Movement Traffic Sensor', 'Smart Device', 'Monitoring System'], 0.9623132944107056)]
+manual colony inspection -> [('SciBERT (AllenAI)', 'no', ['Pollen Trap', 'Swarm Preparation', 'Brood Chamber', 'Temperature Observation', 'Bee Brush'], 0.8252065181732178), ('BiomedBERT (Microsoft)', 'no', ['Acoustic Emitter', 'Catcher Box', 'Egg Stage', 'Monitoring Process', 'Monitoring System'], 0.9557124972343445)]
+manual hive inspection -> [('SciBERT (AllenAI)', 'no', ['Hive Entrance', 'Varroa Drop Observation', 'Flow Bee Hive', 'Bee Hive Part', 'Frames Hive'], 0.8443937301635742), ('BiomedBERT (Microsoft)', 'no', ['Flow Bee Hive', 'Catcher Box', 'Top Bar Bee Hive', 'Bee Hive', 'Beekeeper Role'], 0.9680110812187195)]
+acoustic amplitude -> [('SciBERT (AllenAI)', 'no', ['Acoustic Pattern', 'Acoustic Emitter', 'Weak Signal', 'Acceleration', 'Humidity'], 0.8967306613922119), ('BiomedBERT (Microsoft)', 'no', ['Acoustic Pattern', 'Acoustic Emitter', 'Sound Vibration Sensor', 'Ambient Temperature', 'Acoustic Pattern Observation'], 0.9756073951721191)]
+acoustic analysis -> [('General BERT (MiniLM)', 'no', ['Acoustic Pattern Observation', 'Acoustic Pattern', 'Acoustic Emitter', 'Data Analysis', 'Sound Vibration Sensor'], 0.7497193813323975), ('SciBERT (AllenAI)', 'no', ['Acoustic Pattern', 'Acoustic Pattern Observation', 'Acoustic Emitter', 'Humidity Observation', 'Temperature Observation'], 0.8720295429229736), ('BiomedBERT (Microsoft)', 'no', ['Acoustic Pattern', 'Acoustic Emitter', 'Data Analysis', 'Actuator', 'Sensor Failure'], 0.9688498973846436)]
+5. Expression: 'acoustic analysis'
+   - Expected state: 'no'
+   - Reason of error: Too high score at the modell (for example. 0.7497) for an unrelated concept.
+
+acoustic and vibration signal -> [('General BERT (MiniLM)', 'no', ['Sound Vibration Sensor', 'Acoustic Pattern', 'Acoustic Pattern Observation', 'Acoustic Emitter', 'Weak Signal'], 0.763827919960022), ('SciBERT (AllenAI)', 'no', ['Acoustic Emitter', 'Acoustic Pattern Observation', 'Sound Vibration Sensor', 'Acoustic Pattern', 'Varroa Drop Observation'], 0.8207869529724121), ('BiomedBERT (Microsoft)', 'no', ['Acoustic Pattern', 'Sound Vibration Sensor', 'Acoustic Pattern Observation', 'Acoustic Emitter', 'Internal Temperature Observation'], 0.9779603481292725)]
+6. Expression: 'acoustic and vibration signal'
+   - Expected state: 'no'
+   - Reason of error: Too high score at the modell (for example. 0.7638) for an unrelated concept.
+
+audio signal -> [('SciBERT (AllenAI)', 'no', ['Abdomen', 'Acceleration', 'Thorax', 'Actuator', 'Gsmmodule'], 0.8005890250205994), ('BiomedBERT (Microsoft)', 'no', ['Acoustic Pattern', 'Sound Vibration Sensor', 'Gas Sensor', 'Data Logger', 'Power Alert'], 0.9620192646980286)]
+audio spectrogram image -> [('SciBERT (AllenAI)', 'no', ['Sound Vibration Sensor', 'Weak Signal', 'Bee Smoker', 'Top Bar Bee Hive', 'Honey Filter'], 0.8116083741188049), ('BiomedBERT (Microsoft)', 'no', ['Acoustic Pattern Observation', 'Acoustic Pattern', 'Sound Vibration Sensor', 'Sensor Failure Alert', 'Scout Bee'], 0.9731642007827759)]
+bee behavior analysis -> [('General BERT (MiniLM)', 'no', ['Bee', 'Bee Role', 'Bee Colony', 'Guard Bee', 'Observational Bee Hive'], 0.694021463394165), ('SciBERT (AllenAI)', 'no', ['Bee Colony', 'Acoustic Pattern Observation', 'Scout Bee', 'Swarm Preparation', 'Bee Role'], 0.8220593333244324), ('BiomedBERT (Microsoft)', 'no', ['Bee Colony', 'Worker Bee Role', 'Queen Bee Role', 'Flow Bee Hive', 'Bee Hive Status'], 0.9714217185974121)]
+7. Expression: 'bee behavior analysis'
+   - Expected state: 'no'
+   - Reason of error: Too high score at the modell (for example. 0.6940) for an unrelated concept.
+
+bee flight activity -> [('General BERT (MiniLM)', 'no', ['Drone Bee Role', 'Bee', 'Bee Role', 'Field Bee', 'Bee Colony'], 0.7039813995361328), ('SciBERT (AllenAI)', 'no', ['Mated Bee', 'Bee Role', 'Bee Colony', 'Pollen Trap', 'Scout Bee'], 0.8406200408935547), ('BiomedBERT (Microsoft)', 'no', ['Bee Colony', 'Flow Bee Hive', 'Worker Bee Role', 'Acoustic Pattern', 'Bee Hive'], 0.9765563011169434)]
+8. Expression: 'bee flight activity'
+   - Expected state: 'no'
+   - Reason of error: Too high score at the modell (for example. 0.7040) for an unrelated concept.
+
+bee flight path -> [('General BERT (MiniLM)', 'no', ['Bee', 'Drone Bee Role', 'Field Bee', 'Bee Colony', 'Bee Role'], 0.6507323980331421), ('SciBERT (AllenAI)', 'no', ['Forager Bee', 'Mated Bee', 'Top Bar Bee Hive', 'Scout Bee', 'Virgin Bee'], 0.8842105865478516), ('BiomedBERT (Microsoft)', 'no', ['Worker Bee Role', 'Queen Bee Role', 'Flow Bee Hive', 'Bee Hive Part', 'Queen Bee Excluder'], 0.9798761010169983)]
+9. Expression: 'bee flight path'
+   - Expected state: 'no'
+   - Reason of error: Too high score at the modell (for example. 0.6507) for an unrelated concept.
+
+bee sound signal -> [('General BERT (MiniLM)', 'no', ['Bee', 'Bee Role', 'Drone Bee Role', 'Bee Hive Status', 'Guard Bee'], 0.6702983379364014), ('SciBERT (AllenAI)', 'no', ['Sound Vibration Sensor', 'Scout Bee', 'Honey Filter', 'Bee Brush', 'Bee Smoker'], 0.8618026375770569), ('BiomedBERT (Microsoft)', 'no', ['Acoustic Pattern', 'Sound Vibration Sensor', 'Acoustic Pattern Observation', 'Bee Brush', 'Acoustic Emitter'], 0.9675612449645996)]
+10. Expression: 'bee sound signal'
+   - Expected state: 'no'
+   - Reason of error: Too high score at the modell (for example. 0.6703) for an unrelated concept.
+
+bee colony thermoregulation activity -> [('SciBERT (AllenAI)', 'no', ['Bee Colony', 'Mated Bee', 'Scout Bee', 'Bee Brush', 'Brood Chamber'], 0.8375863432884216), ('BiomedBERT (Microsoft)', 'no', ['Worker Bee Role', 'Beekeeper Role', 'Bee Colony', 'Queen Bee Role', 'Internal Temperature Observation'], 0.965066134929657)]
+brood pheromone -> [('SciBERT (AllenAI)', 'no', ['Brood Chamber', 'Mated Bee', 'Pollen Trap', 'Guard Bee', 'Scout Bee'], 0.909687340259552), ('BiomedBERT (Microsoft)', 'no', ['Brood Chamber', 'Bee Colony', 'Bee Brush', 'Acoustic Pattern', 'Worker Bee Role'], 0.9802168607711792)]
+queen pheromone -> [('SciBERT (AllenAI)', 'no', ['Queen Bee Role', 'Mated Bee', 'Guard Bee', 'Queen Bee Excluder', 'Forager Bee'], 0.8906717896461487), ('BiomedBERT (Microsoft)', 'no', ['Bee Colony', 'Acoustic Emitter', 'Queenless', 'Acoustic Pattern', 'Bee Brush'], 0.9721246957778931)]
+varroa infestation -> [('General BERT (MiniLM)', 'no', ['Varroa Drop', 'Varroa Drop Observation', 'Larva Stage', 'Organism', 'Propolis Trap'], 0.6971262097358704), ('SciBERT (AllenAI)', 'no', ['Apis Florae', 'Varroa Drop', 'Varroa Drop Observation', 'Bee Hive Status', 'Pollen Trap'], 0.8034458756446838), ('BiomedBERT (Microsoft)', 'no', ['Varroa Drop', 'Varroa Drop Observation', 'Apis Cerana', 'Apis Andremiformis', 'Bee Hive Part'], 0.9874987602233887)]
+11. Expression: 'varroa infestation'
+   - Expected state: 'no'
+   - Reason of error: Too high score at the modell (for example. 0.6971) for an unrelated concept.
+
+battery voltage -> [('General BERT (MiniLM)', 'no', ['Battery', 'Power Low', 'Power Status', 'Solar Panel', 'Power Okay'], 0.6678258776664734), ('SciBERT (AllenAI)', 'no', ['Solar Panel', 'Humidity Sensor', 'Temperature Sensor', 'Power Supply System', 'Power Alert'], 0.8648680448532104), ('BiomedBERT (Microsoft)', 'no', ['Actuator', 'Power Supply System', 'Gas Sensor', 'Power Critical', 'Sensor Failure'], 0.9683406949043274)]
+12. Expression: 'battery voltage'
+   - Expected state: 'no'
+   - Reason of error: Too high score at the modell (for example. 0.6678) for an unrelated concept.
+
+hive health assessment -> [('SciBERT (AllenAI)', 'no', ['Hive Entrance', 'Hive Stand', 'Bee Hive Part', 'Bee Hive Status', 'Frames Hive'], 0.8376901149749756), ('BiomedBERT (Microsoft)', 'no', ['Hive Stand', 'Hive Entrance', 'Frames Hive', 'Dadant Hive', 'Flow Bee Hive'], 0.9614773392677307)]
+Altogether 12 critical blindspot in the system.
+=================================================================
+
+=================================================================
+     BERT EMBEDDING EVALUATION REPORT ( True Label Recall@5 )
+=================================================================
+Global recall success of models (without NIL cases ):
+
+ - General BERT (MiniLM)    : 100.00%
+ - SciBERT (AllenAI)        : 94.00%
+ - BiomedBERT (Microsoft)   : 86.00%
+alarm -> []
+apiary -> []
+arduino -> []
+battery -> []
+beehive -> []
+entrance -> [('BiomedBERT (Microsoft)', 'HiveEntrance', ['Boots', 'Alert', 'Antenna', 'Entity', 'Battery'], 0.0, -1)]
+frame -> []
+gps -> [('SciBERT (AllenAI)', 'GPSTracker', ['Bee', 'Disconnected', 'Thorax', 'Normal', 'Virgin Bee'], 0.0, -1), ('BiomedBERT (Microsoft)', 'GPSTracker', ['Sensor', 'Antenna', 'Person', 'Alert', 'Organization'], 0.0, -1)]
+humidity -> []
+loadcell -> [('SciBERT (AllenAI)', 'WeightSensor', ['Gpstracker', 'Network Router', 'Power Contoller', 'Rfidreader', 'Honey Filter'], 0.0, -1)]
+logger -> []
+measurement -> []
+observation -> []
+sensor -> []
+temperature -> []
+weight -> []
+abdomen -> []
+antenna -> []
+apis -> []
+bee -> []
+colony -> [('SciBERT (AllenAI)', 'BeeColony_', ['Region', 'Event', 'Bee', 'Frame', 'Sensor'], 0.0, -1), ('BiomedBERT (Microsoft)', 'BeeColony_', ['Frame', 'Person', 'Antenna', 'Disturbed', 'Bee'], 0.0, -1)]
+larva -> [('BiomedBERT (Microsoft)', 'LarvaStage_', ['Antenna', 'Thorax', 'Frame', 'Person', 'Disturbed'], 0.0, -1)]
+pupa -> []
+thorax -> []
+worker -> [('BiomedBERT (Microsoft)', 'WorkerBeeRole', ['Disturbed', 'Person', 'Boots', 'Antenna', 'Battery'], 0.0, -1)]
+ambient temperature -> []
+bee hive -> []
+beehive entrance -> [('BiomedBERT (Microsoft)', 'HiveEntrance', ['Hive Bee', 'Bee Hive Part', 'Drone Bee Role', 'Bee Role', 'Propolis Trap'], 0.0, -1)]
+beehive state -> [('BiomedBERT (Microsoft)', 'BeeHiveStatus', ['Hive Bee', 'Beekeeping Utensil', 'Bee Hive Part', 'Langstroth Bee Hive', 'Bee Hive'], 0.0, -1)]
+brood chamber -> []
+environmental temperature -> []
+external temperature -> []
+gas sensor -> []
+hive entrance -> []
+humidity sensor -> []
+internal temperature -> []
+monitoring system -> []
+weight reading -> []
+weight recording -> []
+weight sensor -> []
+apis mellifera -> []
+bee colony -> []
+bee brush -> []
+bee smoker -> []
+comb foundation -> []
+forager bee -> []
+hive stand -> []
+honey super -> []
+pollen trap -> []
+temperature sensor -> []
+calibration -> []
+flight -> []
+foraging -> []
+image -> []
+inspection -> []
+iot -> []
+microcontroller -> []
+noise -> []
+spectrogram -> []
+thermoregulation -> []
+video -> []
+voltage -> []
+amitraz -> []
+amplitude -> []
+frequency -> []
+grafting -> []
+hemolymph -> []
+hormone -> []
+nectar -> []
+pesticide -> []
+pheromone -> []
+proboscis -> []
+rainfall -> []
+sacbrood -> []
+thymol -> []
+ambient sound -> []
+ambient vibration -> []
+analog audio signal -> []
+apiary inspection -> []
+apiary wide hive sensor network -> []
+beehive analysis -> []
+hive analysis -> []
+iot hive monitoring device -> []
+manual colony inspection -> []
+manual hive inspection -> []
+acoustic amplitude -> []
+acoustic analysis -> []
+acoustic and vibration signal -> []
+audio signal -> []
+audio spectrogram image -> []
+bee behavior analysis -> []
+bee flight activity -> []
+bee flight path -> []
+bee sound signal -> []
+bee colony thermoregulation activity -> []
+brood pheromone -> []
+queen pheromone -> []
+varroa infestation -> []
+battery voltage -> []
+hive health assessment -> []
