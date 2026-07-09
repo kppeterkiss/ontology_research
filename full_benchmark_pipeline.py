@@ -248,16 +248,27 @@ def ask_llama_with_context(model_name, mention, context, candidates):
       "reasoning": "One-sentence strict logical justification."
     }}
     """
-    try:
-        response = ollama.chat(
-            model=model_name, messages=[{"role": "user", "content": prompt}],
-            options={"temperature": 0.0, "num_ctx": 2048},
-            keep_alive=0, format="json"
-        )
-        return json.loads(response['message']['content'])
-    except Exception as e:
-        return {"decision": "ERROR", "matched_concept_id": None, "reasoning": str(e)}
 
+    try:
+        response = ollama.chat(model=model_name, messages=[{"role": "user", "content": prompt}],
+                               options={"temperature": 0.0, "num_ctx": 2048}, keep_alive=0, format="json")
+
+        # JAVÍTÁS: Különválasztjuk a generált szöveget és a teljesítmény-metaadatokat!
+        parsed_content = json.loads(response['message']['content'])
+
+        return {
+            "decision": parsed_content.get("decision"),
+            "matched_concept_id": parsed_content.get("matched_concept_id"),
+            "reasoning": parsed_content.get("reasoning"),
+            # Átmentjük a gyökérben lévő összes Ollama statisztikát
+            "total_duration": response.get("total_duration", 0),
+            "prompt_eval_count": response.get("prompt_eval_count", 0),
+            "eval_count": response.get("eval_count", 0),
+            "eval_duration": response.get("eval_duration", 0)
+        }
+    except Exception as e:
+        return {"decision": "ERROR", "reasoning": str(e), "total_duration": 0, "prompt_eval_count": 0, "eval_count": 0,
+                "eval_duration": 0}
 
 def ask_llama_without_context(model_name, mention, candidates):
     """2. TESZT VERZIÓ: Kontextus NÉLKÜL (Szigorú fogalmi azonosság teszt)"""
@@ -311,16 +322,28 @@ def ask_llama_without_context(model_name, mention, candidates):
       "reasoning": "One-sentence strict logical justification based on smart apiculture."
     }}
     """
-    try:
-        response = ollama.chat(
-            model=model_name, messages=[{"role": "user", "content": prompt}],
-            options={"temperature": 0.0, "num_ctx": 2048},
-            keep_alive=0, format="json"
-        )
-        return json.loads(response['message']['content'])
-    except Exception as e:
-        return {"decision": "ERROR", "matched_concept_id": None, "reasoning": str(e)}
 
+
+    try:
+        response = ollama.chat(model=model_name, messages=[{"role": "user", "content": prompt}],
+                               options={"temperature": 0.0, "num_ctx": 2048}, keep_alive=0, format="json")
+
+        # JAVÍTÁS: Különválasztjuk a generált szöveget és a teljesítmény-metaadatokat!
+        parsed_content = json.loads(response['message']['content'])
+
+        return {
+            "decision": parsed_content.get("decision"),
+            "matched_concept_id": parsed_content.get("matched_concept_id"),
+            "reasoning": parsed_content.get("reasoning"),
+            # Átmentjük a gyökérben lévő összes Ollama statisztikát
+            "total_duration": response.get("total_duration", 0),
+            "prompt_eval_count": response.get("prompt_eval_count", 0),
+            "eval_count": response.get("eval_count", 0),
+            "eval_duration": response.get("eval_duration", 0)
+        }
+    except Exception as e:
+        return {"decision": "ERROR", "reasoning": str(e), "total_duration": 0, "prompt_eval_count": 0, "eval_count": 0,
+                "eval_duration": 0}
 
 def generate_strict_definition(mention, context):
     prompt = f"""

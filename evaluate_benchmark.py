@@ -1,7 +1,7 @@
 import json
 import os
 
-PERFORMANCE_LOG_FILE = "results/pipeline_performance_log.jsonl"
+PERFORMANCE_LOG_FILE = "results/minilm_pipeline_performance_log_llm_performance.jsonl"
 LABEL_JSON = "labels.json"
 ONTOLOGY_JSON = "ontology_rdf.json"
 
@@ -234,5 +234,115 @@ def run_advanced_evaluation():
         print("\n" + "-" * 70)
 
 
+
+
+
+def run_efficiency_evaluation():
+    if not os.path.exists(PERFORMANCE_LOG_FILE):
+        print(f"Hiba: A '{PERFORMANCE_LOG_FILE}' fájl nem található!")
+        return
+
+    # Adatszerkezet a mérőszámok gyűjtéséhez
+    # { model_name: { "with_context": { "time": [], "prompt_tokens": [], "gen_tokens": [] }, ... } }
+    metrics = {}
+    total_records = 0
+
+    with open(PERFORMANCE_LOG_FILE, "r", encoding="utf-8") as f:
+        for line in f:
+            if not line.strip():
+                continue
+            try:
+                record = json.loads(line)
+                # Csak azokat a sorokat dolgozzuk fel, amikben már benne van a fogyasztási mátrix
+                if "consumption_metrics" not in record:
+                    continue
+
+                total_records += 1
+                cons_data = record["consumption_metrics"]
+
+                for model_name, modes in cons_data.items():
+                    if model_name not in metrics:
+                        metrics[model_name] = {
+                            "with_context": {"time": [], "prompt_tokens": [], "gen_tokens": []},
+                            "without_context": {"time": [], "prompt_tokens": [], "gen_tokens": []}
+                        }
+
+                    # Kontextusos adatok gyűjtése
+                    w_ctx = modes.get("with_context", {})
+                    if w_ctx.get("prompt_tokens", 0) > 0:  # Biztonsági szűrés a hibás futások ellen
+                        metrics[model_name]["with_context"]["time"].append(w_ctx.get("total_time_sec", 0))
+                        metrics[model_name]["with_context"]["prompt_tokens"].append(w_ctx.get("prompt_tokens", 0))
+                        metrics[model_name]["with_context"]["gen_tokens"].append(w_ctx.get("generated_tokens", 0))
+
+                    # Kontextus nélküli adatok gyűjtése
+                    no_ctx = modes.get("without_context", {})
+                    if no_ctx.get("prompt_tokens", 0) > 0:
+                        metrics[model_name]["without_context"]["time"].append(no_ctx.get("total_time_sec", 0))
+                        metrics[model_name]["without_context"]["prompt_tokens"].append(no_ctx.get("prompt_tokens", 0))
+                        metrics[model_name]["without_context"]["gen_tokens"].append(no_ctx.get("generated_tokens", 0))
+
+            except Exception as e:
+                pass  # Átugorjuk a régebbi struktúrájú sorokat
+
+    if total_records == 0:
+        print("Nem találtam olyan naplóbejegyzést, ami tartalmazna fogyasztási adatokat.")
+        return
+
+    # =====================================================================
+    # ERÖDMÉNYEK ÖSSZESÍTÉSE ÉS KIÍRATÁSA
+    # =====================================================================
+    print("\n" + "=" * 70)
+    print("        LLM ERŐFORRÁS-FOGYASZTÁSI ÉS EFFEKTIVITÁSI JELENTÉS")
+    print("=" * 70)
+    print(f"Feldolgozott esetek száma: {total_records}")
+
+    for model_name, modes in metrics.items():
+        print("\n" + "#" * 60)
+        print(f" MODELL: {model_name.upper()}")
+        print("#" * 60)
+
+        # 1. KONTEXTUSSAL ÁTLAGOK
+        w_ctx = modes["with_context"]
+        if w_ctx["prompt_tokens"]:
+            avg_w_time = sum(w_ctx["time"]) / len(w_ctx["time"])
+            avg_w_prompt = sum(w_ctx["prompt_tokens"]) / len(w_ctx["prompt_tokens"])
+            avg_w_gen = sum(w_ctx["gen_tokens"]) / len(w_ctx["gen_tokens"])
+            total_w_time = sum(w_ctx["time"])
+
+            print(f"-> FUTTATÁS 1: KONTEXTUSSAL + PÉLDÁKKAL (Few-Shot)")
+            print(f"   - Átlagos bemeneti (Prompt) méret : {avg_w_prompt:.1f} token / kérés")
+            print(f"   - Átlagos legenerált válasz méret: {avg_w_gen:.1f} token / kérés")
+            print(f"   - Átlagos válaszidő (Latency)    : {avg_w_time:.3f} másodperc")
+            print(f"   - Összesített futási idő         : {total_w_time:.2f} másodperc (~{total_w_time / 60:.1f} perc)")
+
+        # 2. KONTEXTUS NÉLKÜL ÁTLAGOK
+        no_ctx = modes["without_context"]
+        if no_ctx["prompt_tokens"]:
+            avg_n_time = sum(no_ctx["time"]) / len(no_ctx["time"])
+            avg_n_prompt = sum(no_ctx["prompt_tokens"]) / len(no_ctx["prompt_tokens"])
+            avg_n_gen = sum(no_ctx["gen_tokens"]) / len(no_ctx["gen_tokens"])
+            total_n_time = sum(no_ctx["time"])
+
+            print(f"\n-> FUTTATÁS 2: KONTEXTUS NÉLKÜL (Tiszta gép-tudás)")
+            print(f"   - Átlagos bemeneti (Prompt) méret : {avg_n_prompt:.1f} token / kérés")
+            print(f"   - Átlagos legenerált válasz méret: {avg_n_gen:.1f} token / kérés")
+            print(f"   - Átlagos válaszidő (Latency)    : {avg_n_time:.3f} másodperc")
+            print(f"   - Összesített futási idő         : {total_n_time:.2f} másodperc (~{total_n_time / 60:.1f} perc)")
+
+        # 3. GAZDASÁGOSSÁGI ÖSSZEHASONLÍTÁS (HEURISZTIKA)
+        if w_ctx["prompt_tokens"] and no_ctx["prompt_tokens"]:
+            token_saved_pct = ((avg_w_prompt - avg_n_prompt) / avg_w_prompt) * 100
+            time_saved_pct = ((total_w_time - total_n_time) / total_w_time) * 100
+
+            print(f"\n=> EFFEKTIVITÁSI MÉRLEG (Gazdaságossági mutatók):")
+            print(f"   - A kontextus elhagyásával a bemeneti adatmennyiség {token_saved_pct:.1f}%-kal CSÖKKENT.")
+            print(f"   - A teljes számítási idő a laptopodon {time_saved_pct:.1f}%-kal LETT RÖVIDEBB.")
+
+    print("\n" + "=" * 70)
+
+
+
+
 if __name__ == "__main__":
-    run_advanced_evaluation()
+    #run_advanced_evaluation()
+    run_efficiency_evaluation()
