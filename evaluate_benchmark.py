@@ -1,7 +1,8 @@
 import json
 import os
 
-PERFORMANCE_LOG_FILE = "results/minilm_pipeline_performance_log_llm_performance.jsonl"
+PERFORMANCE_LOG_FILE_COMP = "results/minilm_pipeline_performance_log_llm_performance.jsonl"
+PERFORMANCE_LOG_FILE = "results/minilm_pipeline_performance_log.jsonl"
 LABEL_JSON = "labels.json"
 ONTOLOGY_JSON = "ontology_rdf.json"
 
@@ -238,8 +239,8 @@ def run_advanced_evaluation():
 
 
 def run_efficiency_evaluation():
-    if not os.path.exists(PERFORMANCE_LOG_FILE):
-        print(f"Hiba: A '{PERFORMANCE_LOG_FILE}' fájl nem található!")
+    if not os.path.exists(PERFORMANCE_LOG_FILE_COMP):
+        print(f"Hiba: A '{PERFORMANCE_LOG_FILE_COMP}' fájl nem található!")
         return
 
     # Adatszerkezet a mérőszámok gyűjtéséhez
@@ -344,5 +345,5 @@ def run_efficiency_evaluation():
 
 
 if __name__ == "__main__":
-    #run_advanced_evaluation()
+    run_advanced_evaluation()
     run_efficiency_evaluation()

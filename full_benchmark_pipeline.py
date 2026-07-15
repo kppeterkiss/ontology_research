@@ -361,15 +361,15 @@ def generate_strict_definition(mention, context):
 def log_benchmark_result_with_metrics(source_doc, mention, context, bert_candidates, model_outputs, oov_info,
                                       embedding_model_used):
     """
-    KITERJESZTETT NAPLÓZÓ: A döntések mellett elmenti az Ollama által
-    mért tűpontos token- és idő-fogyasztási statisztikákat is!
+    KITERJESZTETT ÉS JAVÍTOTT NAPLÓZÓ:
+    Visszahozza a 'matched_concept_id' és 'reasoning' mezőket a döntések mellé,
+    miközben hiánytalanul megőrzi a token- és idő-fogyasztási statisztikákat is.
     """
-    # Kivonjuk a fogyasztási statisztikákat a modellek válaszaiból
+    # 1. Kiszámoljuk az idő- és token-fogyasztási mátrixot minden modellre
     consumption_metrics = {}
     for model_name, results in model_outputs.items():
         consumption_metrics[model_name] = {
             "with_context": {
-                # Nanoszekundumból másodpercre váltunk (/ 1,000,000,000)
                 "total_time_sec": round(results["with_context"].get("total_duration", 0) / 1e9, 3),
                 "prompt_tokens": results["with_context"].get("prompt_eval_count", 0),
                 "generated_tokens": results["with_context"].get("eval_count", 0),
@@ -389,25 +389,38 @@ def log_benchmark_result_with_metrics(source_doc, mention, context, bert_candida
             }
         }
 
+    # 2. Összeállítjuk a teljes naplóbejegyzést az összes hiánytalan adattal
     log_entry = {
         "doc": source_doc,
         "mention": mention,
         "context": context,
         "embedding_model_used": embedding_model_used,
         "oov_diagnostic": oov_info,
-        "bert_top_suggestions": [{"id": c["concept"]["id"], "name": c["concept"]["name"], "score": round(c["score"], 4)}
-                                 for c in bert_candidates],
-        # Elmentjük a tiszta JSON döntéseket
+        "bert_top_suggestions": [
+            {"id": c["concept"]["id"], "name": c["concept"]["name"], "score": round(c["score"], 4)}
+            for c in bert_candidates
+        ],
+
+        # === VISSZAHOZOTT INTEGRÁLT LOGIKAI RÉSZ: Minden mező megmarad! ===
         "benchmark_results": {
             m: {
-                "with_context": {"decision": model_outputs[m]["with_context"].get("decision")},
-                "without_context": {"decision": model_outputs[m]["without_context"].get("decision")}
+                "with_context": {
+                    "decision": model_outputs[m]["with_context"].get("decision"),
+                    "matched_concept_id": model_outputs[m]["with_context"].get("matched_concept_id"),
+                    "reasoning": model_outputs[m]["with_context"].get("reasoning")
+                },
+                "without_context": {
+                    "decision": model_outputs[m]["without_context"].get("decision"),
+                    "matched_concept_id": model_outputs[m]["without_context"].get("matched_concept_id"),
+                    "reasoning": model_outputs[m]["without_context"].get("reasoning")
+                }
             } for m in model_outputs
         },
-        # ÉS MELLÉ TESSZÜK A FOGYASZTÁSI MÁTRIXOT
+
         "consumption_metrics": consumption_metrics
     }
 
+    # 3. Hozzáfűzés a fájl végére
     with open(PERFORMANCE_LOG_FILE, "a", encoding="utf-8") as f:
         f.write(json.dumps(log_entry, ensure_ascii=False) + "\n")
 
